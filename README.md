@@ -1,4 +1,5 @@
 # FieldLabComparison
 
 Scripts for metagenomic analysis of bacterial 16S sequences from ants.
-[MothuR] (https://mothur.org/)
+
+Methods for processing field and lab sample data will be performed in MothuR. The program is a free [download] (https://mothur.org/wiki/Download_mothur) and a [tutorial] (https://mothur.org/wiki/454_SOP) is also available.
