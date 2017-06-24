@@ -71,3 +71,20 @@ unique.seqs(fasta=~/Desktop/SRP018246/~/Desktop/SRP018246.fasta)
 # inspect unique sequences
 # input: unique.fasta file, output: unique.summary file
 summary.seqs(fasta=~/Desktop/SRP018246/~/Desktop/SRP018246.unique.fasta, name=~/Desktop/SRP018246/~/Desktop/SRP018246.names)
+
+#download version 128 full length silva reference sequences and seed silva reference file and rename files
+system(cp Silva.nr_128 FullLengthSilva.fasta)
+system(cp Silva.seed_128 SilvaSeed.fasta)
+
+#trim sequences 
+#forward and reverse primer sequences are in primers.oligos file
+trim.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.fasta, oligos=~/Desktop/FieldLabComparison/primers.oligos)
+
+# align seed silva reference file with sequences in fasta file
+align.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.trim.fasta, reference=~/Desktop/SilvaSeed123.fasta, processors=2)
+
+#inspect alignment
+summary.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.trim.align)
+
+#trim the alignment to specific region
+pcr.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.trim.align, start=, end=, keepdots=FALSE)
