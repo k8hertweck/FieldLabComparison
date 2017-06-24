@@ -1,10 +1,13 @@
 # FieldLabComparison
 
-Scripts for metagenomic analysis of bacterial 16S sequences from ants.
-
-Methods for processing field and lab sample data for comparison and phylogeny building will be performed in MothuR. The program is a free [download] (https://mothur.org/wiki/Download_mothur) and a [tutorial] (https://mothur.org/wiki/454_SOP) is also available.
+Scripts for microbiome analysis of bacterial 16S sequences from ants.
 
 **Dependencies:**
-* [uchime] (http://drive5.com/uchime/uchime_download.html)
-* [blast] (https://blast.ncbi.nlm.nih.gov/Blast.cgi)
-* [CatchAllCmdW] (http://www.northeastern.edu/catchall/downloads/CatchAll.manual.2.0.pdf)
+* [SRA Toolkit v2.8.1or higher](https://github.com/ncbi/sra-tools) for data download
+* [MothuR](https://mothur.org/wiki/Download_mothur) for raw data cleaning and OTU assessment
+
+**Workflow**
+* `dataDownload.sh` download data from NCBI SRA using user-supplied list of accession numbers
+
+**Analysis Design**
+* MothuR analysis based on [454](https://www.mothur.org/wiki/454_SOP) and [MiSeq](https://www.mothur.org/wiki/MiSeq_SOP) tutorials
