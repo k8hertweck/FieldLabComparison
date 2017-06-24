@@ -1,4 +1,4 @@
-system(cp ~/Desktop/SRP018246/mergegroups SRP018246.groups)## Microbiome Ant Field vs Lab Analysis OTUs using mothur
+## Microbiome Ant Field vs Lab Analysis OTUs using mothur
 
 # execute within project directory
 
@@ -47,7 +47,7 @@ fastq.info(fastq=~/Desktop/SRP018246/SRR655364.fastq)
 make.group(fasta=~/Desktop/SRP018246/SRR655327.fasta-~/Desktop/SRP018246/SRR655328.fasta-~/Desktop/SRP018246/SRR655329.fasta-~/Desktop/SRP018246/SRR655330.fasta-~/Desktop/SRP018246/SRR655331.fasta-~/Desktop/SRP018246/SRR655332.fasta-~/Desktop/SRP018246/SRR655333.fasta-~/Desktop/SRP018246/SRR655334.fasta-~/Desktop/SRP018246/SRR655335.fasta-~/Desktop/SRP018246/SRR655336.fasta-~/Desktop/SRP018246/SRR655337.fasta-~/Desktop/SRP018246/SRR655338.fasta-~/Desktop/SRP018246/SRR655339.fasta-~/Desktop/SRP018246/SRR655340.fasta-~/Desktop/SRP018246/SRR655341.fasta-~/Desktop/SRP018246/SRR655342.fasta-~/Desktop/SRP018246/SRR655343.fasta-~/Desktop/SRP018246/SRR655344.fasta-~/Desktop/SRP018246/SRR655345.fasta-~/Desktop/SRP018246/SRR655346.fasta-~/Desktop/SRP018246/SRR655347.fasta-~/Desktop/SRP018246/SRR655348.fasta-~/Desktop/SRP018246/SRR655349.fasta-~/Desktop/SRP018246/SRR655350.fasta-~/Desktop/SRP018246/SRR655351.fasta-~/Desktop/SRP018246/SRR655352.fasta-~/Desktop/SRP018246/SRR655353.fasta-~/Desktop/SRP018246/SRR655354.fasta-~/Desktop/SRP018246/SRR655355.fasta-~/Desktop/SRP018246/SRR655356.fasta-~/Desktop/SRP018246/SRR655357.fasta-~/Desktop/SRP018246/SRR655358.fasta-~/Desktop/SRP018246/SRR655359.fasta-~/Desktop/SRP018246/SRR655360.fasta-~/Desktop/SRP018246/SRR655361.fasta-~/Desktop/SRP018246/SRR655362.fasta-~/Desktop/SRP018246/SRR655363.fasta-~/Desktop/SRP018246/SRR655364.fasta, groups=field-field-field-field-lab-lab-lab-lab-field-field-field-field-field-field-lab-lab-lab-lab-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field)
 
 # use mothur system command to copy file to new name
-system(cp ~/Desktop/SRP018246/mergegroups SRP018246.groups)
+system(cp ~/Desktop/SRP018246/mergegroups ~/Desktop/SRP018246/SRP018246.groups)
 
 # make master fasta file (combines individual fasta files into a single file, ~/Desktop/SRP018246.fasta)
 merge.files(input=~/Desktop/SRP018246/SRR655327.fasta-~/Desktop/SRP018246/SRR655328.fasta-~/Desktop/SRP018246/SRR655329.fasta-~/Desktop/SRP018246/SRR655330.fasta-~/Desktop/SRP018246/SRR655331.fasta-~/Desktop/SRP018246/SRR655332.fasta-~/Desktop/SRP018246/SRR655333.fasta-~/Desktop/SRP018246/SRR655334.fasta-~/Desktop/SRP018246/SRR655335.fasta-~/Desktop/SRP018246/SRR655336.fasta-~/Desktop/SRP018246/SRR655337.fasta-~/Desktop/SRP018246/SRR655338.fasta-~/Desktop/SRP018246/SRR655339.fasta-~/Desktop/SRP018246/SRR655340.fasta-~/Desktop/SRP018246/SRR655341.fasta-~/Desktop/SRP018246/SRR655342.fasta-~/Desktop/SRP018246/SRR655343.fasta-~/Desktop/SRP018246/SRR655344.fasta-~/Desktop/SRP018246/SRR655345.fasta-~/Desktop/SRP018246/SRR655346.fasta-~/Desktop/SRP018246/SRR655347.fasta-~/Desktop/SRP018246/SRR655348.fasta-~/Desktop/SRP018246/SRR655349.fasta-~/Desktop/SRP018246/SRR655350.fasta-~/Desktop/SRP018246/SRR655351.fasta-~/Desktop/SRP018246/SRR655352.fasta-~/Desktop/SRP018246/SRR655353.fasta-~/Desktop/SRP018246/SRR655354.fasta-~/Desktop/SRP018246/SRR655355.fasta-~/Desktop/SRP018246/SRR655356.fasta-~/Desktop/SRP018246/SRR655357.fasta-~/Desktop/SRP018246/SRR655358.fasta-~/Desktop/SRP018246/SRR655359.fasta-~/Desktop/SRP018246/SRR655360.fasta-~/Desktop/SRP018246/SRR655361.fasta-~/Desktop/SRP018246/SRR655362.fasta-~/Desktop/SRP018246/SRR655363.fasta-~/Desktop/SRP018246/SRR655364.fasta, output=~/Desktop/SRP018246/~/Desktop/SRP018246.fasta)
@@ -71,20 +71,3 @@ unique.seqs(fasta=~/Desktop/SRP018246/~/Desktop/SRP018246.fasta)
 # inspect unique sequences
 # input: unique.fasta file, output: unique.summary file
 summary.seqs(fasta=~/Desktop/SRP018246/~/Desktop/SRP018246.unique.fasta, name=~/Desktop/SRP018246/~/Desktop/SRP018246.names)
-
-#download version 128 full length silva reference sequences and seed silva reference file and rename files
-system(cp Silva.nr_128 FullLengthSilva.fasta)
-system(cp Silva.seed_128 SilvaSeed.fasta)
-
-#trim sequences 
-#forward and reverse primer sequences are in primers.oligos file
-trim.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.fasta, oligos=~/Desktop/FieldLabComparison/primers.oligos)
-
-# align seed silva reference file with sequences in fasta file
-align.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.trim.fasta, reference=~/Desktop/SilvaSeed123.fasta, processors=2)
-
-#inspect alignment
-summary.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.trim.align)
-
-#trim the alignment to specific region
-pcr.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.trim.align, start=, end=, keepdots=FALSE)
