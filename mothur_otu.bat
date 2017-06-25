@@ -34,12 +34,6 @@ fastq.info(fastq=~/Desktop/SRP018246/SRR655354.fastq)
 fastq.info(fastq=~/Desktop/SRP018246/SRR655355.fastq)
 fastq.info(fastq=~/Desktop/SRP018246/SRR655356.fastq)
 fastq.info(fastq=~/Desktop/SRP018246/SRR655357.fastq)
-fastq.info(fastq=~/Desktop/SRP018246/SRR655358.fastq)
-fastq.info(fastq=~/Desktop/SRP018246/SRR655359.fastq)
-fastq.info(fastq=~/Desktop/SRP018246/SRR655360.fastq)
-fastq.info(fastq=~/Desktop/SRP018246/SRR655361.fastq)
-fastq.info(fastq=~/Desktop/SRP018246/SRR655362.fastq)
-fastq.info(fastq=~/Desktop/SRP018246/SRR655363.fastq)
 fastq.info(fastq=~/Desktop/SRP018246/SRR655364.fastq)
 
 # create group file
@@ -71,3 +65,9 @@ unique.seqs(fasta=~/Desktop/SRP018246/~/Desktop/SRP018246.fasta)
 # inspect unique sequences
 # input: unique.fasta file, output: unique.summary file
 summary.seqs(fasta=~/Desktop/SRP018246/~/Desktop/SRP018246.unique.fasta, name=~/Desktop/SRP018246/~/Desktop/SRP018246.names)
+
+#generate an alignment of our data using the align.seqs command by aligning our data from MiSeq SOP named silva.bacteria.fasta
+#input: unique.fasta file
+#output: unique.align, unique.align.report, unique.flip.accnos file
+align.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.fasta, reference=~/Desktop/Silva.bacteria/silva.bacteria.pcr.fasta, processors=2)
+
