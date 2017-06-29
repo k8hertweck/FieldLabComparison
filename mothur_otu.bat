@@ -71,3 +71,43 @@ summary.seqs(fasta=~/Desktop/SRP018246/~/Desktop/SRP018246.unique.fasta, name=~/
 #output: unique.align, unique.align.report, unique.flip.accnos file
 align.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.fasta, reference=~/Desktop/Silva.bacteria/silva.bacteria.pcr.fasta, processors=2)
 
+#inspect aligned sequences
+#input: unique.align, names file
+#output: unique.summary
+summary.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.align, name=~/Desktop/SRP018246/SRP018246.names)
+
+#remove those sequences that are outside the desired range of alignment space
+#input: unique.align file, names file, and group file
+#output: unique.good.align, unique.bad.accnos, good.names, good.groups file
+screen.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.align, name=~/Desktop/SRP018246/SRP018246.names, group=~/Desktop/SRP018246/SRP018246.groups, optimize=end, criteria=90, processors=2)
+
+#inspect sequences and determine whiche parameters in screen.seqs() works best for the data
+#input: unique.good.align and good.names file
+#output: unique.good.summary file
+summary.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.good.align, name=~/Desktop/SRP018246/SRP018246.good.names) 
+
+#filter our alignment so that all of our sequences only overlap in the same region and 
+#to remove any columns in the alignment that don't contain data
+#the parameter trump=. will remove any column that has a "." character, which indicates missing data
+#vertical=T option will remove any column that contains exclusively gaps
+#input: unique.good.align
+#output: unique.good.filter.fasta, filter file
+filter.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.good.align, vertical=T, processors=2)
+
+#remove redundant sequences in the alignment region
+#input: unique.good.filter.fasta,and good.names
+#output: unique.good.filter.names,and unique.good.filter.unique.fasta
+unique.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.good.filter.fasta, name=~/Desktop/SRP018246/SRP018246.good.names)
+
+#splits the sequences by group and then within each group the sequences are pre-clustered 
+#by which sequences that are within 1 or 2 bases of a more abundant sequence
+#the next step is to merge all the sequences back into one fasta file a names file 
+#input: unique.good.filter.unique.fasta, unique.good.filter.names,and good.groups file
+#output: unique.good.filter.unique.precluster.fasta, unique.good.filter.unique.precluster.names, unique.good.filter.unique.precluster.field.map, unique.good.filter.unique.precluster.lab.map file
+pre.cluster(fasta=~/Desktop/SRP018246/SRP018246.unique.good.filter.unique.fasta, name=~/Desktop/SRP018246/SRP018246.unique.good.filter.names, group=~/Desktop/SRP018246/SRP018246.good.groups, diffs=2)
+
+#inspect the preclustered files
+#input: unique.good.filter.unique.precluster.fasta and unique.good.filter.unique.precluster.names file
+#output: unique.good.filter.unique.precluster.summary file
+summary.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.good.filter.unique.precluster.fasta, name=~/Desktop/SRP018246/SRP018246.unique.good.filter.unique.precluster.names)
+
