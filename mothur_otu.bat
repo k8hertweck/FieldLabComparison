@@ -40,7 +40,7 @@ fastq.info(fastq=~/Desktop/SRP018246/SRR655364.fastq)
 # input fasta file and the group names; output mergegroups
 make.group(fasta=~/Desktop/SRP018246/SRR655327.fasta-~/Desktop/SRP018246/SRR655328.fasta-~/Desktop/SRP018246/SRR655329.fasta-~/Desktop/SRP018246/SRR655330.fasta-~/Desktop/SRP018246/SRR655331.fasta-~/Desktop/SRP018246/SRR655332.fasta-~/Desktop/SRP018246/SRR655333.fasta-~/Desktop/SRP018246/SRR655334.fasta-~/Desktop/SRP018246/SRR655335.fasta-~/Desktop/SRP018246/SRR655336.fasta-~/Desktop/SRP018246/SRR655337.fasta-~/Desktop/SRP018246/SRR655338.fasta-~/Desktop/SRP018246/SRR655339.fasta-~/Desktop/SRP018246/SRR655340.fasta-~/Desktop/SRP018246/SRR655341.fasta-~/Desktop/SRP018246/SRR655342.fasta-~/Desktop/SRP018246/SRR655343.fasta-~/Desktop/SRP018246/SRR655344.fasta-~/Desktop/SRP018246/SRR655345.fasta-~/Desktop/SRP018246/SRR655346.fasta-~/Desktop/SRP018246/SRR655347.fasta-~/Desktop/SRP018246/SRR655348.fasta-~/Desktop/SRP018246/SRR655349.fasta-~/Desktop/SRP018246/SRR655350.fasta-~/Desktop/SRP018246/SRR655351.fasta-~/Desktop/SRP018246/SRR655352.fasta-~/Desktop/SRP018246/SRR655353.fasta-~/Desktop/SRP018246/SRR655354.fasta-~/Desktop/SRP018246/SRR655355.fasta-~/Desktop/SRP018246/SRR655356.fasta-~/Desktop/SRP018246/SRR655357.fasta-~/Desktop/SRP018246/SRR655358.fasta-~/Desktop/SRP018246/SRR655359.fasta-~/Desktop/SRP018246/SRR655360.fasta-~/Desktop/SRP018246/SRR655361.fasta-~/Desktop/SRP018246/SRR655362.fasta-~/Desktop/SRP018246/SRR655363.fasta-~/Desktop/SRP018246/SRR655364.fasta, groups=field-field-field-field-lab-lab-lab-lab-field-field-field-field-field-field-lab-lab-lab-lab-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field)
 
-# use mothur system command to copy file to new name
+# use mothur system command to copy file with a new name
 system(cp ~/Desktop/SRP018246/mergegroups ~/Desktop/SRP018246/SRP018246.groups)
 
 # make master fasta file (combines individual fasta files into a single file, ~/Desktop/SRP018246.fasta)
@@ -89,7 +89,7 @@ summary.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.good.align, name=~/Deskt
 #filter our alignment so that all of our sequences only overlap in the same region and 
 #to remove any columns in the alignment that don't contain data
 #the parameter trump=. will remove any column that has a "." character, which indicates missing data
-#vertical=T option will remove any column that contains exclusively gaps
+#vertical=T option will remove any column that containsb  exclusively gaps
 #input: unique.good.align
 #output: unique.good.filter.fasta, filter file
 filter.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.good.align, vertical=T, processors=2)
@@ -103,11 +103,51 @@ unique.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.good.filter.fasta, name=~
 #by which sequences that are within 1 or 2 bases of a more abundant sequence
 #the next step is to merge all the sequences back into one fasta file a names file 
 #input: unique.good.filter.unique.fasta, unique.good.filter.names,and good.groups file
-#output: unique.good.filter.unique.precluster.fasta, unique.good.filter.unique.precluster.names, unique.good.filter.unique.precluster.field.map, unique.good.filter.unique.precluster.lab.map file
+#output: unique.good.filter.unique.precluster.fasta, unique.good.filter.unique.precluster.names, unique.good.filter.unique.precluster.field.map,and unique.good.filter.unique.precluster.lab.map file
 pre.cluster(fasta=~/Desktop/SRP018246/SRP018246.unique.good.filter.unique.fasta, name=~/Desktop/SRP018246/SRP018246.unique.good.filter.names, group=~/Desktop/SRP018246/SRP018246.good.groups, diffs=2)
 
 #inspect the preclustered files
 #input: unique.good.filter.unique.precluster.fasta and unique.good.filter.unique.precluster.names file
 #output: unique.good.filter.unique.precluster.summary file
 summary.seqs(fasta=~/Desktop/SRP018246/SRP018246.unique.good.filter.unique.precluster.fasta, name=~/Desktop/SRP018246/SRP018246.unique.good.filter.unique.precluster.names)
+
+#Detecting and removing chimeras
+#This method will first split the sequences by group and then check each sequence within a group using the more abundant sequences
+as reference sequences. This enables us to parallelize the entire process by putting each group onto a separate processor
+#input: unique.good.filter.unique.precluster.fasta, unique.good.filter.unique.precluster.names,and good.groups file
+#output: unique.good.filter.unique.precluster.denovo.uchime.chimeras and unique.good.filter.unique.precluster.denovo.uchime.accnos file
+chimera.uchime(fasta=~/Desktop/SRP018246/SRP018246.unique.good.filter.unique.precluster.fasta, name=~/Desktop/SRP018246/SRP018246.unique.good.filter.unique.precluster.names, group=~/Desktop/SRP018246/SRP018246.good.groups, processors=2)
+
+##Rename files on a mac
+#use the mothur System command to make copies of same files for mac
+system(cp ~/Desktop/SRP018246/SRP018246.unique.good.filter.unique.precluster.fasta final.fasta)
+system(cp ~/Desktop/SRP018246/SRP018246.unique.good.filter.unique.precluster.names final.names)
+system(cp ~/Desktop/SRP018246/SRP018246.good.groups final.groups)
+
+#use the mothur System command to make copies of same files for Windows
+#If this code does not work, then manually copy all of the 4 files
+system(copy ~/Desktop/SRP018246/SRP018246.unique.good.filter.unique.precluster.fasta final.fasta)
+system(copy ~/Desktop/SRP018246/SRP018246.unique.good.filter.unique.precluster.names final.names)
+system(copy ~/Desktop/SRP018246/SRP018246.good.groups final.groups)
+
+#Option 1 or Option 2 are two different methods available in mothur to build operational taxonomic units (OTUs)
+#The output from Option 2 should be about the same as Option 1. The remainder of this code uses Option 1.
+
+#Option 1: generate a distance matrix and use a cutoff of 0.15(which means you're chucking any pairwise distance larger than 0.15)
+#If the output of this command is in the >100 GBs of memory range you have probably done something incorrectly
+#SRP018246.unique.good.filter.unique.precluster.fasta was renamed final.fasta
+#input: final.fasta file
+#output: final.dist
+dist.seqs(fasta=~/Desktop/SRP018246/final.fasta, cutoff=0.15, processors=2)
+
+#cluster these sequences into OTUs based on the newly created distance matrix and name files
+#cutoff is typically 0.03 for further analysis
+#SRP018246.unique.good.filter.unique.precluster.names was renamed final.names
+#input: final.dist and final.names file
+#output: final.an.sabund, final.an.rabund,and final.an.list file
+cluster(column=~/Desktop/SRP018246/final.dist, name=~/Desktop/SRP018246/final.names) 
+
+#Option 2: use the cluster.split command if you are in a time crunch
+#The output from Option 2 should be about the same as Option 1. The remainder of this code uses Option 1
+cluster.split(fasta=~/Desktop/SRP018246/final.fasta, taxonomy=~/Desktop/SRP018246/final.taxonomy, name=~/Desktop/SRP018246/final.names, taxlevel=3, processors=4)
 
