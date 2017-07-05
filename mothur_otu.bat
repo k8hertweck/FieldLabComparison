@@ -149,5 +149,5 @@ cluster(column=~/Desktop/SRP018246/final.dist, name=~/Desktop/SRP018246/final.na
 
 #Option 2: use the cluster.split command if you are in a time crunch
 #The output from Option 2 should be about the same as Option 1. The remainder of this code uses Option 1
-cluster.split(fasta=~/Desktop/SRP018246/final.fasta, taxonomy=~/Desktop/SRP018246/final.taxonomy, name=~/Desktop/SRP018246/final.names, taxlevel=3, processors=4)
+#cluster.split(fasta=~/Desktop/SRP018246/final.fasta, taxonomy=~/Desktop/SRP018246/final.taxonomy, name=~/Desktop/SRP018246/final.names, taxlevel=3, processors=4)
 
