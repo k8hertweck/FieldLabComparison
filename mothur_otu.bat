@@ -74,10 +74,10 @@ unique.seqs(fasta=analysis.fasta)
 # input: unique.fasta file, output: unique.summary file
 summary.seqs(fasta=analysis.unique.fasta, name=analysis.names)
 
-#generate an alignment of our data using the align.seqs command by aligning our data from MiSeq SOP named silva.bacteria.fasta
+#align our data to silva reference
 #input: unique.fasta file
 #output: unique.align, unique.align.report, unique.flip.accnos file
-align.seqs(fasta=SRP018246.unique.fasta, reference=~/Desktop/Silva.bacteria/silva.bacteria.pcr.fasta, processors=2)
+align.seqs(fasta=SRP018246.unique.fasta, reference=silva/silva.bacteria.pcr.fasta, processors=2)
 
 #inspect aligned sequences
 #input: unique.align, names file
