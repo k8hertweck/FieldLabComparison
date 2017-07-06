@@ -6,6 +6,9 @@
 cd `pwd`
 
 mkdir SRP018246 SRP018247
+cut -f 6 SraRunTableSRP018246.txt | tail +2 > SRP018246.lst
+cut -f 6 SraRunTableSRP01824revised.txt | tail +2 > SRP018247.lst
+
 
 # download  Trachymyrmex/Cyphomyrmex (need metadata corrected)
 cd SRP018246

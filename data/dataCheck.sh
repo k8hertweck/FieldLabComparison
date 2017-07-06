@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # checking SRA metadata against archived sff files
-# usage: execute from GitHub directory
+# usage: ./dataCheck.sh
+# execute from GitHub directory
 # dependencies: seq_crumbs https://bioinf.comav.upv.es/seq_crumbs/
 
 # SraRunTableSRP018247.txt (Trachymyrmex/Cyphomyrmex) is OK
@@ -19,7 +20,7 @@ sed s/454Reads.//g SraRunTableSRP018246.txt | tail +2 | awk '{
 		echo -n
 	else 
 		print $8
-}' > problems.lst
+}' > $SCRIPTS/data/problems.lst
 
 # convert sff to fastq 
 cd $RAW
@@ -31,3 +32,4 @@ done
 
 # manually compare SRA data and fastq from archived sff
 # replace sample names in metadata sheet
+# export new metadata sheet as SraRunTableSRP018246corrected.txt
