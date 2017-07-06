@@ -2,11 +2,15 @@
 
 Scripts for microbiome analysis of bacterial 16S sequences from ants.
 
-* data: PRJNA170251 (Mycocepurus) and PRJNA170250 (Trachymyrmex/Cyphomyrmex)
-	* download metadata sheets for each from SRA, put in `data/`
+**Data:** 
+* SRA accessions:
+	* PRJNA170251 (Mycocepurus): metadata in SRA correct, `data/SraRunTableSRP018247.txt`
+	* PRJNA170250 (Trachymyrmex/Cyphomyrmex): metadata in SRA is not correct, revised metadata in `data/SraRunTableSRP018246revised.txt` 
+* Silva database:
 
 **Dependencies:**
 * [SRA Toolkit v2.8.1or higher](https://github.com/ncbi/sra-tools) for data download
+* [seq_crumbs](https://bioinf.comav.upv.es/seq_crumbs/) only if using `dataCheck.sh` 
 * [MothuR](https://mothur.org/wiki/Download_mothur) for raw data cleaning and OTU assessment
 
 **Analysis Design**
@@ -14,6 +18,6 @@ Scripts for microbiome analysis of bacterial 16S sequences from ants.
 * Visualization and hypothesis testing in R
 
 **Workflow**
-* `dataDownload.sh` download data from NCBI SRA using user-supplied list of accession numbers
-* `dataCheck.sh`
+* `dataDownload.sh` download data from NCBI SRA 
+	* `data/dataCheck.sh` check SRA data against archived sequence files, do not need to run again
 * `mothur_SilvaRef.bat` create custom Silva alignment for reference
