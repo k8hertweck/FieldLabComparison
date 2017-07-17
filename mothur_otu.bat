@@ -35,6 +35,12 @@ fastq.info(fastq=data/SRP018246/SRR655354.fastq)
 fastq.info(fastq=data/SRP018246/SRR655355.fastq)
 fastq.info(fastq=data/SRP018246/SRR655356.fastq)
 fastq.info(fastq=data/SRP018246/SRR655357.fastq)
+fastq.info(fastq=data/SRP018246/SRR655358.fastq)
+fastq.info(fastq=data/SRP018246/SRR655359.fastq)
+fastq.info(fastq=data/SRP018246/SRR655360.fastq)
+fastq.info(fastq=data/SRP018246/SRR655361.fastq)
+fastq.info(fastq=data/SRP018246/SRR655362.fastq)
+fastq.info(fastq=data/SRP018246/SRR655363.fastq)
 fastq.info(fastq=data/SRP018246/SRR655364.fastq)
 
 # move fata and qual files to analysis/
@@ -42,20 +48,20 @@ system(mkdir analysis/)
 system(mv data/*/*.fasta data/*/*.qual analysis/)
 
 # set working directory to analysis for rest of script
-set.dir(input=analysis)
+set.dir(input=analysis/)
 
 # create group file
 # input fasta file and the group names; output mergegroups
-make.group(fasta=SRR655327.fasta-SRR655328.fasta-SRR655329.fasta-SRR655330.fasta-SRR655331.fasta-SRR655332.fasta-SRR655333.fasta-SRR655334.fasta-SRR655335.fasta-SRR655336.fasta-SRR655337.fasta-SRR655338.fasta-SRR655339.fasta-SRR655340.fasta-SRR655341.fasta-SRR655342.fasta-SRR655343.fasta-SRR655344.fasta-SRR655345.fasta-SRR655346.fasta-SRR655347.fasta-SRR655348.fasta-SRR655349.fasta-SRR655350.fasta-SRR655351.fasta-SRR655352.fasta-SRR655353.fasta-SRR655354.fasta-SRR655355.fasta-SRR655356.fasta-SRR655357.fasta-SRR655358.fasta-SRR655359.fasta-SRR655360.fasta-SRR655361.fasta-SRR655362.fasta-SRR655363.fasta-SRR655364.fasta, groups=field-field-field-field-lab-lab-lab-lab-field-field-field-field-field-field-lab-lab-lab-lab-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field)
+make.group(fasta=SRR655327.fasta-SRR655328.fasta-SRR655329.fasta-SRR655330.fasta-SRR655331.fasta-SRR655332.fasta-SRR655333.fasta-SRR655334.fasta-SRR655335.fasta-SRR655336.fasta-SRR655337.fasta-SRR655338.fasta-SRR655339.fasta-SRR655340.fasta-SRR655341.fasta-SRR655342.fasta-SRR655343.fasta-SRR655344.fasta-SRR655345.fasta-SRR655346.fasta-SRR655347.fasta-SRR655348.fasta-SRR655349.fasta-SRR655350.fasta-SRR655351.fasta-SRR655352.fasta-SRR655353.fasta-SRR655354.fasta-SRR655355.fasta-SRR655356.fasta-SRR655357.fasta-SRR655358.fasta-SRR655359.fasta-SRR655360.fasta-SRR655361.fasta-SRR655362.fasta-SRR655363.fasta-SRR655364.fasta, groups=field-field-field-field-lab-lab-lab-lab-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-lab-lab-lab-lab-field-field-field-field)
 
 # use mothur system command to copy file with a new name
-system(cp mergegroups SRP018246.groups)
+system(cp analysis/mergegroups analysis/SRP018246.groups)
 
 # make master fasta file (combines individual fasta files into a single file, analysis.fasta)
-merge.files(input=SRR655327.fasta-SRR655328.fasta-SRR655329.fasta-SRR655330.fasta-SRR655331.fasta-SRR655332.fasta-SRR655333.fasta-SRR655334.fasta-SRR655335.fasta-SRR655336.fasta-SRR655337.fasta-SRR655338.fasta-SRR655339.fasta-SRR655340.fasta-SRR655341.fasta-SRR655342.fasta-SRR655343.fasta-SRR655344.fasta-SRR655345.fasta-SRR655346.fasta-SRR655347.fasta-SRR655348.fasta-SRR655349.fasta-SRR655350.fasta-SRR655351.fasta-SRR655352.fasta-SRR655353.fasta-SRR655354.fasta-SRR655355.fasta-SRR655356.fasta-SRR655357.fasta-SRR655358.fasta-SRR655359.fasta-SRR655360.fasta-SRR655361.fasta-SRR655362.fasta-SRR655363.fasta-SRR655364.fasta, output=analysis.fasta)
+merge.files(input=SRR655327.fasta-SRR655328.fasta-SRR655329.fasta-SRR655330.fasta-SRR655331.fasta-SRR655332.fasta-SRR655333.fasta-SRR655334.fasta-SRR655335.fasta-SRR655336.fasta-SRR655337.fasta-SRR655338.fasta-SRR655339.fasta-SRR655340.fasta-SRR655341.fasta-SRR655342.fasta-SRR655343.fasta-SRR655344.fasta-SRR655345.fasta-SRR655346.fasta-SRR655347.fasta-SRR655348.fasta-SRR655349.fasta-SRR655350.fasta-SRR655351.fasta-SRR655352.fasta-SRR655353.fasta-SRR655354.fasta-SRR655355.fasta-SRR655356.fasta-SRR655357.fasta-SRR655358.fasta-SRR655359.fasta-SRR655360.fasta-SRR655361.fasta-SRR655362.fasta-SRR655363.fasta-SRR655364.fasta, output=analysis/analysis.fasta)
 
 # make master qual file
-merge.files(input=SRR655327.qual-SRR655328.qual-SRR655329.qual-SRR655330.qual-SRR655331.qual-SRR655332.qual-SRR655333.qual-SRR655334.qual-SRR655335.qual-SRR655336.qual-SRR655337.qual-SRR655338.qual-SRR655339.qual-SRR655340.qual-SRR655341.qual-SRR655342.qual-SRR655343.qual-SRR655344.qual-SRR655345.qual-SRR655346.qual-SRR655347.qual-SRR655348.qual-SRR655349.qual-SRR655350.qual-SRR655351.qual-SRR655352.qual-SRR655353.qual-SRR655354.qual-SRR655355.qual-SRR655356.qual-SRR655357.qual-SRR655358.qual-SRR655359.qual-SRR655360.qual-SRR655361.qual-SRR655362.qual-SRR655363.qual-SRR655364.qual, output=analysis.qual)
+merge.files(input=SRR655327.qual-SRR655328.qual-SRR655329.qual-SRR655330.qual-SRR655331.qual-SRR655332.qual-SRR655333.qual-SRR655334.qual-SRR655335.qual-SRR655336.qual-SRR655337.qual-SRR655338.qual-SRR655339.qual-SRR655340.qual-SRR655341.qual-SRR655342.qual-SRR655343.qual-SRR655344.qual-SRR655345.qual-SRR655346.qual-SRR655347.qual-SRR655348.qual-SRR655349.qual-SRR655350.qual-SRR655351.qual-SRR655352.qual-SRR655353.qual-SRR655354.qual-SRR655355.qual-SRR655356.qual-SRR655357.qual-SRR655358.qual-SRR655359.qual-SRR655360.qual-SRR655361.qual-SRR655362.qual-SRR655363.qual-SRR655364.qual, output=analysis/analysis.qual)
 
 # trim sequences when average quality score in 50-by sliding window drops below 35
 # remove the barcode and primer sequences: for 200 bp long sequences, remove any with homopolymers >8 bp, reverse complement each sequence
