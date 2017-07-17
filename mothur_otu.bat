@@ -55,7 +55,8 @@ set.dir(input=analysis)
 make.group(fasta=SRR655327.fasta-SRR655328.fasta-SRR655329.fasta-SRR655330.fasta-SRR655331.fasta-SRR655332.fasta-SRR655333.fasta-SRR655334.fasta-SRR655335.fasta-SRR655336.fasta-SRR655337.fasta-SRR655338.fasta-SRR655339.fasta-SRR655340.fasta-SRR655341.fasta-SRR655342.fasta-SRR655343.fasta-SRR655344.fasta-SRR655345.fasta-SRR655346.fasta-SRR655347.fasta-SRR655348.fasta-SRR655349.fasta-SRR655350.fasta-SRR655351.fasta-SRR655352.fasta-SRR655353.fasta-SRR655354.fasta-SRR655355.fasta-SRR655356.fasta-SRR655357.fasta-SRR655358.fasta-SRR655359.fasta-SRR655360.fasta-SRR655361.fasta-SRR655362.fasta-SRR655363.fasta-SRR655364.fasta, groups=field-field-field-field-lab-lab-lab-lab-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-lab-lab-lab-lab-field-field-field-field)
 
 # use mothur system command to copy file with a new name
-system(cp analysis/mergegroups analysis/merge.groups)
+#system(cp analysis/mergegroups analysis/merge.groups)
+rename.file(input=mergegroups, new=merge.groups)
 
 # make master fasta file (combines individual fasta files into a single file, analysis.fasta)
 merge.files(input=SRR655327.fasta-SRR655328.fasta-SRR655329.fasta-SRR655330.fasta-SRR655331.fasta-SRR655332.fasta-SRR655333.fasta-SRR655334.fasta-SRR655335.fasta-SRR655336.fasta-SRR655337.fasta-SRR655338.fasta-SRR655339.fasta-SRR655340.fasta-SRR655341.fasta-SRR655342.fasta-SRR655343.fasta-SRR655344.fasta-SRR655345.fasta-SRR655346.fasta-SRR655347.fasta-SRR655348.fasta-SRR655349.fasta-SRR655350.fasta-SRR655351.fasta-SRR655352.fasta-SRR655353.fasta-SRR655354.fasta-SRR655355.fasta-SRR655356.fasta-SRR655357.fasta-SRR655358.fasta-SRR655359.fasta-SRR655360.fasta-SRR655361.fasta-SRR655362.fasta-SRR655363.fasta-SRR655364.fasta, output=analysis/analysis.fasta)
@@ -121,15 +122,13 @@ summary.seqs(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, nam
 # output: unique.good.filter.unique.precluster.denovo.uchime.chimeras and unique.good.filter.unique.precluster.denovo.uchime.accnos file
 #chimera.uchime(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, name=analysis.trim.unique.good.filter.unique.precluster.names, group=merge.good.groups, processors=2)
 
-# rename files (Linux and OSX)
-system(cp analysis.trim.unique.good.filter.unique.precluster.fasta final.fasta)
-system(cp analysis.trim.unique.good.filter.unique.precluster.names final.names)
-system(cp analysis.trim.good.groups final.groups)
-
-# rename files (Windows); could also manually copy files
-#system(copy analysis.trim.unique.good.filter.unique.precluster.fasta final.fasta)
-#system(copy analysis.trim.unique.good.filter.unique.precluster.names final.names)
-#system(copy analysis.trim.good.groups final.groups)
+# rename files 
+#system(cp analysis.trim.unique.good.filter.unique.precluster.fasta final.fasta)
+rename.file(input=analysis.trim.unique.good.filter.unique.precluster.fasta, output=final.fasta)
+#system(cp analysis.trim.unique.good.filter.unique.precluster.names final.names)
+rename.file(input=analysis.trim.unique.good.filter.unique.precluster.names, output=final.names)
+#system(cp analysis.trim.good.groups final.groups)
+rename.file(input=analysis.trim.good.groups, output=final.groups)
 
 # Option 1 or 2 are different methods available to build OTUs
 # Output from Option 2 should be similar to Option 1
