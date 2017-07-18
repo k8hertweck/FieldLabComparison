@@ -58,18 +58,18 @@ summary.seqs(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, nam
 #chimera.uchime(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, name=analysis.trim.unique.good.filter.unique.precluster.names, group=analysis.good.groups, processors=6)
 
 # rename files (rename command is unreliable)
-system(cp analysis.trim.unique.good.filter.unique.precluster.fasta final.fasta)
-rename.file(input=analysis.trim.unique.good.filter.unique.precluster.fasta, output=final.fasta)
-system(cp analysis.trim.unique.good.filter.unique.precluster.names final.names)
-rename.file(input=analysis.trim.unique.good.filter.unique.precluster.names, output=final.names)
-system(cp analysis.trim.good.groups final.groups)
-rename.file(input=analysis.trim.good.groups, output=final.groups)
+system(cp analysis/analysis.trim.unique.good.filter.unique.precluster.fasta analysis/final.fasta)
+#rename.file(input=analysis.trim.unique.good.filter.unique.precluster.fasta, output=final.fasta)
+system(cp analysis/analysis.trim.unique.good.filter.unique.precluster.names analysis/final.names)
+#rename.file(input=analysis.trim.unique.good.filter.unique.precluster.names, output=final.names)
+system(cp analysis/analysis.good.groups analysis/final.groups)
+#rename.file(input=analysis.good.groups, output=final.groups)
 
 # Option 1 or 2 are different methods available to build OTUs
 # Output from Option 2 should be similar to Option 1
 # This workflow uses Option 1.
 
-# Option 1: generate distance matrix, and use a 
+# Option 1: generate distance matrix
 # cutoff of 0.15 means removing all pairwise distance larger than 0.15
 # If output is >100 GBs of memory, something is wrong
 # output: final.dist
@@ -77,9 +77,8 @@ dist.seqs(fasta=final.fasta, cutoff=0.15, processors=6)
 
 # cluster sequences into OTUs based on distance matrix
 # cutoff is typically 0.03 for further analysis
-# output: final.an.sabund, final.an.rabund,and final.an.list file
+# output: final.an.sabund, final.an.rabund, final.an.list 
 cluster(column=final.dist, name=final.names) 
 
 # Option 2: quick and dirty
 #cluster.split(fasta=final.fasta, taxonomy=final.taxonomy, name=final.names, taxlevel=3, processors=6)
-
