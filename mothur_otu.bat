@@ -67,10 +67,9 @@ merge.files(input=SRR655327.qual-SRR655328.qual-SRR655329.qual-SRR655330.qual-SR
 # summarize complete sequences
 summary.seqs(fasta=analysis.fasta)
 
-# trim sequences when average quality score in 50-by sliding window drops below 35
-# remove the barcode and primer sequences: for 200 bp long sequences, remove any with homopolymers >8 bp, reverse complement each sequence
+# trim sequences for quality
 # output files: trim.fasta, scrap.fasta, trim.qual, and scrap.qual files
-trim.seqs(fasta=analysis.fasta, qfile=analysis.qual, maxambig=0, maxhomop=8, flip=T, bdiffs=1, pdiffs=2, qwindowaverage=35, qwindowsize=50, minlength=200, processors=2)
+trim.seqs(fasta=analysis.fasta, qfile=analysis.qual, maxambig=1, maxhomop=8, flip=T, qaverage=25, minlength=200, processors=2)
  
 # inspect trimmed sequences
 # output: summary file
