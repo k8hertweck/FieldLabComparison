@@ -2,6 +2,7 @@
 
 # usage: mothur mothur_otu.bat
 # execute within project directory
+# for explanation of commands: https://www.mothur.org/wiki/Sequence_processing
 
 #convert fastq files fasta + qual files
 fastq.info(fastq=data/SRP018246/SRR655327.fastq)
@@ -54,9 +55,9 @@ set.dir(input=analysis)
 # output mergegroups
 make.group(fasta=SRR655327.fasta-SRR655328.fasta-SRR655329.fasta-SRR655330.fasta-SRR655331.fasta-SRR655332.fasta-SRR655333.fasta-SRR655334.fasta-SRR655335.fasta-SRR655336.fasta-SRR655337.fasta-SRR655338.fasta-SRR655339.fasta-SRR655340.fasta-SRR655341.fasta-SRR655342.fasta-SRR655343.fasta-SRR655344.fasta-SRR655345.fasta-SRR655346.fasta-SRR655347.fasta-SRR655348.fasta-SRR655349.fasta-SRR655350.fasta-SRR655351.fasta-SRR655352.fasta-SRR655353.fasta-SRR655354.fasta-SRR655355.fasta-SRR655356.fasta-SRR655357.fasta-SRR655358.fasta-SRR655359.fasta-SRR655360.fasta-SRR655361.fasta-SRR655362.fasta-SRR655363.fasta-SRR655364.fasta, groups=field-field-field-field-lab-lab-lab-lab-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-lab-lab-lab-lab-field-field-field-field)
 
-# use mothur system command to copy file with a new name
-#system(cp analysis/mergegroups analysis/analysis.groups)
-rename.file(input=mergegroups, new=analysis.groups)
+# rename groups file
+system(cp analysis/mergegroups analysis/analysis.groups)
+#rename.file(input=mergegroups, new=analysis.groups)
 
 # make master fasta file (combines individual fasta files into a single file, analysis.fasta)
 merge.files(input=SRR655327.fasta-SRR655328.fasta-SRR655329.fasta-SRR655330.fasta-SRR655331.fasta-SRR655332.fasta-SRR655333.fasta-SRR655334.fasta-SRR655335.fasta-SRR655336.fasta-SRR655337.fasta-SRR655338.fasta-SRR655339.fasta-SRR655340.fasta-SRR655341.fasta-SRR655342.fasta-SRR655343.fasta-SRR655344.fasta-SRR655345.fasta-SRR655346.fasta-SRR655347.fasta-SRR655348.fasta-SRR655349.fasta-SRR655350.fasta-SRR655351.fasta-SRR655352.fasta-SRR655353.fasta-SRR655354.fasta-SRR655355.fasta-SRR655356.fasta-SRR655357.fasta-SRR655358.fasta-SRR655359.fasta-SRR655360.fasta-SRR655361.fasta-SRR655362.fasta-SRR655363.fasta-SRR655364.fasta, output=analysis/analysis.fasta)
@@ -69,7 +70,7 @@ summary.seqs(fasta=analysis.fasta)
 
 # trim sequences for quality
 # output files: trim.fasta, scrap.fasta, trim.qual, and scrap.qual files
-trim.seqs(fasta=analysis.fasta, qfile=analysis.qual, maxambig=1, maxhomop=8, flip=T, qaverage=25, minlength=200, processors=2)
+trim.seqs(fasta=analysis.fasta, qfile=analysis.qual, maxambig=1, maxhomop=8, flip=T, qaverage=25, minlength=200, processors=6)
  
 # inspect trimmed sequences
 # output: summary file
@@ -93,7 +94,7 @@ summary.seqs(fasta=analysis.trim.unique.align, name=analysis.trim.names)
 
 # remove sequences outside the desired range of alignment space
 # output: unique.good.align, unique.bad.accnos, good.names, good.groups file
-screen.seqs(fasta=analysis.trim.unique.align, name=analysis.trim.names, group=analysis.groups, optimize=end, criteria=90, processors=2)
+screen.seqs(fasta=analysis.trim.unique.align, name=analysis.trim.names, group=analysis.groups, optimize=end, criteria=90, processors=6)
 
 # inspect sequences 
 # output: unique.good.summary file
@@ -103,15 +104,15 @@ summary.seqs(fasta=analysis.trim.unique.good.align, name=analysis.trim.good.name
 # the parameter trump=. will remove any column that has a "." character, which indicates missing data
 # vertical=T option will remove any column that contains exclusively gaps
 # output: unique.good.filter.fasta, filter file
-filter.seqs(fasta=analysis.trim.unique.good.align, vertical=T, processors=2)
+filter.seqs(fasta=analysis.trim.unique.good.align, vertical=T, processors=6)
 
 # remove redundant sequences in the alignment region
-# output: unique.good.filter.names,and unique.good.filter.unique.fasta
+# output: unique.good.filter.names, unique.good.filter.unique.fasta
 unique.seqs(fasta=analysis.trim.unique.good.filter.fasta, name=analysis.trim.good.names)
 
 # pre-cluster within each group 
 # output: unique.good.filter.unique.precluster.fasta, unique.good.filter.unique.precluster.names, unique.good.filter.unique.precluster.field.map,and unique.good.filter.unique.precluster.lab.map file
-pre.cluster(fasta=analysis.trim.unique.good.filter.unique.fasta, name=analysis.trim.unique.good.filter.names, group=analysis.good.groups, diffs=2)
+pre.cluster(fasta=analysis.trim.unique.good.filter.unique.subsample.fasta, name=analysis.trim.unique.good.filter.subsample.names, group=analysis.good.groups, diffs=2)
 
 # inspect the preclustered files
 # output: unique.good.filter.unique.precluster.summary file
@@ -119,7 +120,7 @@ summary.seqs(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, nam
 
 # detecting and removing chimeras (unnecessary since completed in SRA data)
 # output: unique.good.filter.unique.precluster.denovo.uchime.chimeras and unique.good.filter.unique.precluster.denovo.uchime.accnos file
-#chimera.uchime(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, name=analysis.trim.unique.good.filter.unique.precluster.names, group=analysis.good.groups, processors=2)
+#chimera.uchime(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, name=analysis.trim.unique.good.filter.unique.precluster.names, group=analysis.good.groups, processors=6)
 
 # rename files 
 #system(cp analysis.trim.unique.good.filter.unique.precluster.fasta final.fasta)
@@ -137,7 +138,7 @@ rename.file(input=analysis.trim.good.groups, output=final.groups)
 # cutoff of 0.15 means removing all pairwise distance larger than 0.15
 # If output is >100 GBs of memory, something is wrong
 # output: final.dist
-dist.seqs(fasta=final.fasta, cutoff=0.15, processors=2)
+dist.seqs(fasta=final.fasta, cutoff=0.15, processors=6)
 
 # cluster sequences into OTUs based on distance matrix
 # cutoff is typically 0.03 for further analysis
@@ -145,5 +146,5 @@ dist.seqs(fasta=final.fasta, cutoff=0.15, processors=2)
 cluster(column=final.dist, name=final.names) 
 
 # Option 2: quick and dirty
-#cluster.split(fasta=final.fasta, taxonomy=final.taxonomy, name=final.names, taxlevel=3, processors=4)
+#cluster.split(fasta=final.fasta, taxonomy=final.taxonomy, name=final.names, taxlevel=3, processors=6)
 
