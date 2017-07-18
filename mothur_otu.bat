@@ -55,8 +55,8 @@ set.dir(input=analysis)
 make.group(fasta=SRR655327.fasta-SRR655328.fasta-SRR655329.fasta-SRR655330.fasta-SRR655331.fasta-SRR655332.fasta-SRR655333.fasta-SRR655334.fasta-SRR655335.fasta-SRR655336.fasta-SRR655337.fasta-SRR655338.fasta-SRR655339.fasta-SRR655340.fasta-SRR655341.fasta-SRR655342.fasta-SRR655343.fasta-SRR655344.fasta-SRR655345.fasta-SRR655346.fasta-SRR655347.fasta-SRR655348.fasta-SRR655349.fasta-SRR655350.fasta-SRR655351.fasta-SRR655352.fasta-SRR655353.fasta-SRR655354.fasta-SRR655355.fasta-SRR655356.fasta-SRR655357.fasta-SRR655358.fasta-SRR655359.fasta-SRR655360.fasta-SRR655361.fasta-SRR655362.fasta-SRR655363.fasta-SRR655364.fasta, groups=field-field-field-field-lab-lab-lab-lab-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-lab-lab-lab-lab-field-field-field-field)
 
 # use mothur system command to copy file with a new name
-#system(cp analysis/mergegroups analysis/merge.groups)
-rename.file(input=mergegroups, new=merge.groups)
+#system(cp analysis/mergegroups analysis/analysis.groups)
+rename.file(input=mergegroups, new=analysis.groups)
 
 # make master fasta file (combines individual fasta files into a single file, analysis.fasta)
 merge.files(input=SRR655327.fasta-SRR655328.fasta-SRR655329.fasta-SRR655330.fasta-SRR655331.fasta-SRR655332.fasta-SRR655333.fasta-SRR655334.fasta-SRR655335.fasta-SRR655336.fasta-SRR655337.fasta-SRR655338.fasta-SRR655339.fasta-SRR655340.fasta-SRR655341.fasta-SRR655342.fasta-SRR655343.fasta-SRR655344.fasta-SRR655345.fasta-SRR655346.fasta-SRR655347.fasta-SRR655348.fasta-SRR655349.fasta-SRR655350.fasta-SRR655351.fasta-SRR655352.fasta-SRR655353.fasta-SRR655354.fasta-SRR655355.fasta-SRR655356.fasta-SRR655357.fasta-SRR655358.fasta-SRR655359.fasta-SRR655360.fasta-SRR655361.fasta-SRR655362.fasta-SRR655363.fasta-SRR655364.fasta, output=analysis/analysis.fasta)
@@ -93,7 +93,7 @@ summary.seqs(fasta=analysis.trim.unique.align, name=analysis.trim.names)
 
 # remove sequences outside the desired range of alignment space
 # output: unique.good.align, unique.bad.accnos, good.names, good.groups file
-screen.seqs(fasta=analysis.trim.unique.align, name=analysis.trim.names, group=merge.groups, optimize=end, criteria=90, processors=2)
+screen.seqs(fasta=analysis.trim.unique.align, name=analysis.trim.names, group=analysis.groups, optimize=end, criteria=90, processors=2)
 
 # inspect sequences 
 # output: unique.good.summary file
@@ -111,7 +111,7 @@ unique.seqs(fasta=analysis.trim.unique.good.filter.fasta, name=analysis.trim.goo
 
 # pre-cluster within each group 
 # output: unique.good.filter.unique.precluster.fasta, unique.good.filter.unique.precluster.names, unique.good.filter.unique.precluster.field.map,and unique.good.filter.unique.precluster.lab.map file
-pre.cluster(fasta=analysis.trim.unique.good.filter.unique.fasta, name=analysis.trim.unique.good.filter.names, group=merge.good.groups, diffs=2)
+pre.cluster(fasta=analysis.trim.unique.good.filter.unique.fasta, name=analysis.trim.unique.good.filter.names, group=analysis.good.groups, diffs=2)
 
 # inspect the preclustered files
 # output: unique.good.filter.unique.precluster.summary file
@@ -119,7 +119,7 @@ summary.seqs(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, nam
 
 # detecting and removing chimeras (unnecessary since completed in SRA data)
 # output: unique.good.filter.unique.precluster.denovo.uchime.chimeras and unique.good.filter.unique.precluster.denovo.uchime.accnos file
-#chimera.uchime(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, name=analysis.trim.unique.good.filter.unique.precluster.names, group=merge.good.groups, processors=2)
+#chimera.uchime(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, name=analysis.trim.unique.good.filter.unique.precluster.names, group=analysis.good.groups, processors=2)
 
 # rename files 
 #system(cp analysis.trim.unique.good.filter.unique.precluster.fasta final.fasta)
