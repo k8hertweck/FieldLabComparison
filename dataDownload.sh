@@ -5,19 +5,18 @@
 
 cd `pwd`
 
-mkdir SRP018246 SRP018247
-cut -f 6 SraRunTableSRP018246.txt | tail +2 > SRP018246.lst
-cut -f 6 SraRunTableSRP01824revised.txt | tail +2 > SRP018247.lst
+mkdir data/SRP018246 data/SRP018247
+cut -f 6 data/SraRunTableSRP018246corrected.txt | tail +2 > data/SRP018246.lst
+cut -f 6 data/SraRunTableSRP018247.txt | tail +2 > data/SRP018247.lst
 
-
-# download  Trachymyrmex/Cyphomyrmex (need metadata corrected)
-cd SRP018246
+# download  Trachymyrmex/Cyphomyrmex
+cd data/SRP018246
 for x in `cat ../SRP018246.lst`
 	do
 		fastq-dump $x
 done
 
-# download Mycocepurus (no changes to data needed)
+# download Mycocepurus
 cd ../SRP018247
 for x in `cat ../SRP018247.lst`
 	do
