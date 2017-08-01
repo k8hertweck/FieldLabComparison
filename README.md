@@ -7,6 +7,7 @@ Scripts for microbiome analysis of bacterial 16S sequences from ants.
 	* PRJNA170251 (Mycocepurus): metadata in SRA correct, `data/SraRunTableSRP018247.txt`
 	* PRJNA170250 (Trachymyrmex/Cyphomyrmex): metadata in SRA is not correct, revised metadata in `data/SraRunTableSRP018246revised.txt` 
 * Silva database:
+	* Use [Full length sequences and taxonomy references](https://www.mothur.org/wiki/Silva_reference_files) for version 128, which includes taxonomy file 
 
 **Dependencies:**
 * [SRA Toolkit v2.8.1or higher](https://github.com/ncbi/sra-tools) for data download
