@@ -5,15 +5,15 @@
 
 # rename downloaded database
 #system(cp Silva.seed_128 SilvaSeed.fasta)
-#or using the silva reference files from the MiSeq SOP: silva.nr_v128.align 
+#or using the updated silva reference files from the MiSeq SOP: silva.nr_v128.align 
 
 # aligns known sequence to complete database
 # output: E.coliV1V3.align, E.coliV1V3.align.report, E.coliV1V3.flip.accnos file
-align.seqs(fasta=silva/E.coliV1V3.fas, template=Silva.nr_v128/silva.nr_v128.align)
+align.seqs(fasta=Silva.nr_v128/E.coliV1V3.fas, template=Silva.nr_v128/silva.nr_v128.align)
 
 # identify start and stop of V1-V3 region of 16S rRNA 
 # output: E.coliV1V3.summary
-summary.seqs(fasta=silva/E.coliV1V3.align)
+summary.seqs(fasta=Silva.nr_v128/E.coliV1V3.align)
 
 # trim the template to V1-V3
 # output: silva.bacteria.pcr.fasta 
