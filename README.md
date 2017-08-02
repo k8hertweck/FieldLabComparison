@@ -5,7 +5,7 @@ Scripts for microbiome analysis of bacterial 16S sequences from ants.
 **Data:** 
 * SRA accessions:
 	* PRJNA170251 (Mycocepurus): metadata in SRA correct, `data/SraRunTableSRP018247.txt`
-	* PRJNA170250 (Trachymyrmex/Cyphomyrmex): metadata in SRA is not correct, revised metadata in `data/SraRunTableSRP018246revised.txt` 
+	* PRJNA170250 (Trachymyrmex/Cyphomyrmex): metadata in SRA is not correct, revised metadata in `data/SraRunTableSRP018246corrected.txt` 
 * Silva database:
 
 **Dependencies:**
