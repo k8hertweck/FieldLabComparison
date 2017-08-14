@@ -246,6 +246,8 @@ So... which to use for what application? If you have the RAM, I'd suggest using 
 
 This will get you 104,711 unique sequences to then align against (meh.). Other tricks to consider would be to use `get.lineage` to pull out the reference sequences that are from the Bacteria, this will probably only reduce the size of the database by ~10%. You could also try using `filter.seqs` with vertical=T; however, that might be problematic if there are insertions in your sequences (can't know *a priori*). It's likely that you can just use the `silva.seed_v128.align` reference for aligning. For classifying sequences, I would strongly recommend using the `silva.nr_v128.align` and `silva.nr_v128.tax` references after running pcr.seqs on `silva.nr_v128.align`. I probably wouldn't advise using `unique.seqs` on the output.
 
+Note: After downloading the [full length sequences and taxonomy references](https://www.mothur.org/wiki/Silva_reference_files) files from the mothur website, move the silva.nr_v128.align document to the silva directory. 
+
 Legalese
 --------
 
