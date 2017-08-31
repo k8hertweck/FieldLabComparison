@@ -4,7 +4,7 @@
 # execute within project directory
 
 # rename downloaded database
-system(cp Silva.seed_128 SilvaSeed.fasta)
+system(cp Silva.seed_128.align SilvaSeed.fasta)
 #or using the updated silva reference files from the MiSeq SOP: silva.nr_v128.align 
 
 # aligns known sequence to complete database
