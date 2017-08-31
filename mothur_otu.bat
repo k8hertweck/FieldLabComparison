@@ -21,7 +21,7 @@ summary.seqs(fasta=analysis.trim.unique.fasta, name=analysis.trim.names)
 
 # align our data to silva reference
 # output: analysis.trim.unique.align, analysis.trim.unique.align.report, analysis.trim.unique.flip.accnos 
-align.seqs(fasta=analysis.trim.unique.fasta, reference=Silva.nr_v128/silva.nr_v128.pcr.align, flip=T, processors=6)
+align.seqs(fasta=analysis.trim.unique.fasta, reference=silva/silva.nr_v128.pcr.align, flip=T, processors=6)
 
 # inspect aligned sequences
 # output: analysis.trim.unique.summary
