@@ -5,15 +5,7 @@
 
 # rename downloaded database
 #system(cp Silva.seed_128 SilvaSeed.fasta)
-#or using the silva reference files from the MiSeq SOP: silva.nr_128.align as seen below
-#download silva reference file version 128
-wget https://www.mothur.org/w/images/b/b4/Silva.nr_v128.tgz
-
-#untar and gunzip reference file
-tar -zxvf Silva.nr_v128.tgz
-
-#move silva.nr_v128.align reference file  to silva directory
-mv silva.nr_v128.align silva/
+#or using the silva reference files from the MiSeq SOP: silva.bacteria.fasta 
 
 # aligns known sequence to complete database
 # output: E.coliV1V3.align, E.coliV1V3.align.report, E.coliV1V3.flip.accnos file
