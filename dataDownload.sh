@@ -15,6 +15,10 @@ tar -zxvf Silva.nr_v128.tgz
 #move silva.nr_v128.align reference file  to silva directory
 mv silva.nr_v128.align silva/
 
+#removing unnecessary silva files and mothur logfiles
+rm *.logfile
+rm *.nr_v128.*
+
 #setting up data files and directories
 mkdir data/SRP018246 data/SRP018247
 cut -f 6 data/SraRunTableSRP018246corrected.txt | tail +2 > data/SRP018246.lst
