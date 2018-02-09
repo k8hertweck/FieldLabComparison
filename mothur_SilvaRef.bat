@@ -5,7 +5,7 @@
 
 # rename downloaded database
 #system(cp Silva.seed_128 SilvaSeed.fasta)
-#or using the silva reference files from the MiSeq SOP: silva.bacteria.fasta 
+#or using the silva reference files from the MiSeq SOP: silva.nr_128.align as seen below
 
 # aligns known sequence to complete database
 # output: E.coliV1V3.align, E.coliV1V3.align.report, E.coliV1V3.flip.accnos file
