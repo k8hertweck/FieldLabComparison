@@ -14,15 +14,21 @@ tar -zxvf Silva.nr_v128.tgz
 
 #move silva.nr_v128.align reference file  to silva directory
 mv silva.nr_v128.align silva/
+mv silva.nr_v128.tax silva/
 
 #removing unnecessary silva files and mothur logfiles
 rm *.logfile
-rm *.nr_v128.*
+rm *.tgz
 
 #setting up data files and directories
 mkdir data/SRP018246 data/SRP018247
-cut -f 6 data/SraRunTableSRP018246corrected.txt | tail +2 > data/SRP018246.lst
-cut -f 6 data/SraRunTableSRP018247.txt | tail +2 > data/SRP018247.lst
+#for Mac
+#cut -f 6 data/SraRunTableSRP018246corrected.txt | tail +2 > data/SRP018246.lst
+#cut -f 6 data/SraRunTableSRP018247.txt | tail +2 > data/SRP018247.lst
+
+#for Ubuntu
+cut -f 6 data/SraRunTableSRP018246corrected.txt | tail --lines=+2 > data/SRP018246.lst
+cut -f 6 data/SraRunTableSRP018247.txt | tail --lines=+2 > data/SRP018247.lst
 
 # download  Trachymyrmex/Cyphomyrmex
 cd data/SRP018246
