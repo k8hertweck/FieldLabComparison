@@ -96,7 +96,7 @@ count.groups()
 
 #sub-sample all the samples to the sample with the fewest sequences(4420)
 #input: final.an.shared file
-#output: final.an.unique.subsample.shared
+#output: final.an.0.03.subsample.shared
 sub.sample(shared=final.an.shared, size=4420)
 
 #get the taxonomy information for each of our OTUs
