@@ -100,21 +100,20 @@ count.groups()
 sub.sample(shared=final.an.shared, size=4420)
 
 #get the taxonomy information for each of our OTUs
-#DO NOT HAVE A TAXONOMY FILE
+#output: final.an.0.03.cons.taxonomy, final.an.0.03.cons.tax.summary
 #classify.otu(list=final.an.list, name=final.names, taxonomy=final.taxonomy, label=0.03)
 
 ##Phylotype
 #goes through the taxonomy file and bins sequences together that have the same taxonomy
-#DO NOT HAVE A TAXONOMY FILE
+#output: final.tx.sabund, final.tx.rabund, final.tx.list
 #phylotype(taxonomy=final.taxonomy, name=final.names, label=1)
 
 #make a shared file and standardize the number of sequences in each group
 make.shared(list=final.tx.list, group=final.groups, label=1)
-#DO NOT HAVE A TAXONOMY FILE
-#sub.sample(shared=final.tx.shared, size=4420)
+sub.sample(shared=final.tx.shared, size=4420)
 
 #get the taxonomy of each phylotype
-#DO NOT HAVE A TAXONOMY FILE
+#output: final.tx.1.cons.taxonomy, final.tx.1.cons.tax.summary 
 #classify.otu(list=final.tx.list, name=final.names, taxonomy=final.taxonomy, label=1)
 
 ##Phylogenetic tree
