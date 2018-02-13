@@ -109,6 +109,7 @@ sub.sample(shared=final.an.shared, size=4420)
 #phylotype(taxonomy=final.taxonomy, name=final.names, label=1)
 
 #make a shared file and standardize the number of sequences in each group
+#output: final.an.0.03.subsample.shared
 make.shared(list=final.tx.list, group=final.groups, label=1)
 sub.sample(shared=final.tx.shared, size=4420)
 
