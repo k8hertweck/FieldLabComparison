@@ -1,3 +1,4 @@
+
 data/SRP018246
 data/SRP018247
 data/SraRunTableSRP018246.txt
@@ -15,6 +16,7 @@ analysis/*.list
 analysis/*.tree.sum
 analysis/final.dist
 analysis/final.an.shared
+analysis/all.lst
 *.logfile
 silva/E.coli.fas
 silva/*.flip.accnos
