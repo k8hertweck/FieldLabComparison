@@ -4,7 +4,9 @@ data/SRP018247
 data/SraRunTableSRP018246.txt
 analysis/analysis.*
 analysis/*.summary
-analysis/*.taxonomy
+analysis/final.taxonomy
+analysis/final.equalized.taxonomy
+analysis/final.tx.1.cons.taxonomy
 analysis/*.sabund
 analysis/*.rabund
 analysis/*.names
