@@ -1,7 +1,6 @@
 #!/bin/bash
 #execute this script in main project directory
 
-# activate qiime 1
 cd `pwd`
 
 # activate qiime 1
