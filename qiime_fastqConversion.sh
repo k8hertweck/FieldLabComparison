@@ -10,11 +10,11 @@ source activate qiime1
 cd data/SRP018246
 for x in `cat ../SRP018246.lst`
 	do
-		convert_fastaqual_fastq.py -f $x.fastq -c fastq_to_fastaqual -o ../analysis
+		convert_fastaqual_fastq.py -f $x.fastq -c fastq_to_fastaqual -o ../../analysis
 done
 
 cd ../SRP018247
 for x in `cat ../SRP018247.lst`
 	do
-		convert_fastaqual_fastq.py -f $x.fastq -c fastq_to_fastaqual -o ../analysis
+		convert_fastaqual_fastq.py -f $x.fastq -c fastq_to_fastaqual -o ../../analysis
 done
