@@ -18,3 +18,12 @@ for x in `cat ../SRP018247.lst`
 	do
 		convert_fastaqual_fastq.py -f $x.fastq -c fastq_to_fastaqual -o ../../analysis
 done
+
+#create a combined_seqs.fna file with all fasta files to be analysed
+add_qiime_labels.py -i ../../analysis -c InputFileName -m metadata_mapping_file.txt -o seqs.fna
+
+#move combined_seqs.fna file to analysis folder
+mv seqs.fna/combined_seqs.fna analysis/combined_seqs.fna
+
+#remove empty directory
+rmdir seqs.fna
