@@ -27,8 +27,7 @@ Scripts for microbiome analysis of bacterial 16S sequences from ants.
 **QIIME Workflow**
 * `dataDownload.sh` download data (as fastq files) from NCBI SRA 
 	* `data/dataCheck.sh` check SRA data against archived sequence files, do not need to run again
-* `qiime_fastqConversion.sh` converts fastq to fasta & qual files	
+* `qiime_workflow.sh` uses 3 scripts to take fastq files and obtain an OTU table biom file	
 	* `convert_fastaqual_fastq.py` converts fastq to fasta & qual files in qiime
 	* `add_qiime_labels.py` combines all fasta files into one fasta file in qiime
-* `pick_de_novo_otus.py` a series of 7 scripts that outputs OTU table biom file
-
+	* `pick_de_novo_otus.py` a series of 7 scripts that outputs OTU table biom file
