@@ -30,4 +30,6 @@ Scripts for microbiome analysis of bacterial 16S sequences from ants.
 * `qiime_workflow.sh` uses 3 scripts to take fastq files and obtain an OTU table biom file	
 	* `convert_fastaqual_fastq.py` converts fastq to fasta & qual files in qiime
 	* `add_qiime_labels.py` combines all fasta files into one fasta file in qiime
+		* `metadata_mapping_file.txt` contains data that assist in combining all fasta files into one fasta file in qiime
 	* `pick_de_novo_otus.py` a series of 7 scripts that outputs OTU table biom file
+		* `qiime_parameters.txt` changes default settings of python script
