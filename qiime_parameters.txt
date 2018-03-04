@@ -1,4 +1,4 @@
 pick_otus:derep_fullseq True
 align.seqs:template_fp /Users/hertwecklab/Andrea/Kellner-Ortiz_project/FieldLabComparison/silva/silva.bacteria.pcr.fasta
 filter_alignment:remove_outliers True
-make_otu_table:taxonomy /Users/hertwecklab/Andrea/Kellner-Ortiz_project/FieldLabComparison/analysis/tax_assignments.txt
+make_otu_table:taxonomy /Users/hertwecklab/Andrea/Kellner-Ortiz_project/FieldLabComparison/results/uclust_assigned_taxonomy/combined_seqs_rep_set_tax_assignments.txt
