@@ -1,5 +1,6 @@
 #!/bin/bash
 #execute this script in main project directory
+#requires mapping file and parameters file
 
 cd `pwd`
 
