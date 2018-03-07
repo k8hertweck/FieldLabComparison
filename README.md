@@ -18,6 +18,7 @@ Scripts for microbiome analysis of bacterial 16S sequences from ants.
 * Visualization and hypothesis testing in R
 
 **Mothur Workflow**
+
 *For handling 454 data*
 * `dataDownload.sh` download data from NCBI SRA 
 	* `data/dataCheck.sh` check SRA data against archived sequence files, do not need to run again
@@ -26,6 +27,7 @@ Scripts for microbiome analysis of bacterial 16S sequences from ants.
 * `mothur_otu.bat` processes combined sequences and outputs OTU table
 
 **QIIME Workflow**
+
 *For handling 454 data*
 * `dataDownload.sh` download data (as fastq files) from NCBI SRA 
 	* `data/dataCheck.sh` check SRA data against archived sequence files, do not need to run again
