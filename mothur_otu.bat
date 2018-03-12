@@ -39,7 +39,7 @@ summary.seqs(fasta=analysis.trim.unique.good.align, name=analysis.trim.good.name
 # the parameter trump=. will remove any column that has a "." character, which indicates missing data
 # vertical=T option will remove any column that contains exclusively gaps
 # output: analysis.trim.unique.good.filter.fasta, filter file
-filter.seqs(fasta=analysis.trim.unique.good.align, vertical=T, trump=., processors=6)
+filter.seqs(fasta=analysis.trim.unique.good.align, vertical=T, processors=6)
 
 # remove redundant sequences in the alignment region
 # output: analysis.trim.unique.good.filter.names, analysis.trim.unique.good.filter.unique.fasta
