@@ -25,6 +25,7 @@ Scripts for microbiome analysis of bacterial 16S sequences from ants.
 * `mothur_SilvaRef.bat` create custom Silva alignment for reference
 * `mothur_prep.sh` split, trim, and aggregate sequence files
 * `mothur_otu.bat` processes combined sequences and outputs OTU table
+* `DataVisPrep.sh` contains code from perl and raxml to convert the final fasta file from mothur to a tree file
 
 **QIIME Workflow**
 
