@@ -11,21 +11,10 @@ sed 's/\./\-/g' final.fasta | sed 's/\-1/\.1/g' | sed 's/\-2/\.2/g' | sed 's/\-3
 #output: final.edited.fasta.phy
 perl Fasta2Phylip.pl mothurDataVisualizations/final.edited.fasta mothurDataVisualizations/final.edited.phy
 
-#Navigate to the directory that contains the raxml executable file on your local directory
 #RAxML program will convert the phylip formatted file into a tree file that can be visualized with phyloseq R package or FigTree.
+#Navigate to the directory that contains the raxml executable file on your local directory
 # requires an aligned fasta format & a file in aligned phylip format
-# the -f a specifies rapid Bootstrap analysis and search for best ­scoring ML tree in one program 
-# the -# flag specifies number of bootstrap runs  
-# the -n flag specifies job name (used in output files)
-# the -m flag specifies binary model selection
-# the -x flag specifies randomly selected number
-# the -s flag specifies the location of the phylip formatted file
-# the -p flag specifies randomly selected number
 #generate #Maximum likelihood (ML) phylogenetic tree inference with RAxML
-
-
-#In the terminal, navigate to the directory that holds the phylip formatted file
-# requires an aligned fasta format & a file in aligned phylip format
 # the -f a specifies rapid Bootstrap analysis and search for best ­scoring ML tree in one program 
 # the -# flag specifies number of bootstrap runs  
 # the -n flag specifies job name (used in output files)
