@@ -1,3 +1,6 @@
 pick_otus:derep_fullseq True
-align.seqs:template_fp /Users/hertwecklab/Andrea/Kellner-Ortiz_project/FieldLabComparison/silva/silva.bacteria.pcr.fasta
+align.seqs:template_fp /Users/hertwecklab/Desktop/Andrea/Kellner-Ortiz_project/FieldLabComparison/silva/silva.nr_v128.pcr.align
+assign_taxonomy:reference_seqs_fp /Users/hertwecklab/Desktop/Andrea/Kellner-Ortiz_project/FieldLabComparison/silva/97_otus_16S.fasta
+assign_taxonomy:id_to_taxonomy_fp /Users/hertwecklab/Desktop/Andrea/Kellner-Ortiz_project/FieldLabComparison/silva/consensus_taxonomy_all_levels.txt
 filter_alignment:remove_outliers True
+make_otu_table:taxonomy /Users/hertwecklab/Desktop/Andrea/Kellner-Ortiz_project/FieldLabComparison/KellnerResults/uclust_assigned_taxonomy
