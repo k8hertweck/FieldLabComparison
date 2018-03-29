@@ -1,11 +1,7 @@
-## Create custom Silva alignment for use in Mothur
+## Create custom Silva alignment for use in Mothur (to replace silva.bacteria.fasta from MiSeq SOP)
 
 # usage: mothur mothur_SilvaRef.bat
 # execute within project directory
-
-# rename downloaded database
-#system(cp Silva.seed_128.align SilvaSeed.fasta)
-#version 128 silva reference files replacing those from the MiSeq SOP (silva.bacteria.fasta)
 
 # aligns known sequence to complete database
 # move silva.nr_128.align to the silva directory
