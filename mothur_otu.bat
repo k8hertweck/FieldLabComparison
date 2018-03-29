@@ -21,7 +21,7 @@ summary.seqs(fasta=analysis.trim.unique.fasta, name=analysis.trim.names)
 
 # align our data to silva reference
 # output: analysis.trim.unique.align, analysis.trim.unique.align.report, analysis.trim.unique.flip.accnos 
-align.seqs(fasta=analysis.trim.unique.fasta, reference=silva/silva.nr_v128.align, flip=T, processors=6)
+align.seqs(fasta=analysis.trim.unique.fasta, reference=silva/silva.nr_v128.pcr.align, flip=T, processors=6)
 
 # inspect aligned sequences
 # output: analysis.trim.unique.summary
@@ -58,10 +58,10 @@ summary.seqs(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, nam
 #chimera.uchime(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, name=analysis.trim.unique.good.filter.unique.precluster.names, group=analysis.good.groups, processors=6)
 
 #generate count table to be used
-count.seqs(name=nalysis.trim.unique.good.filter.unique.precluster.names)
+count.seqs(name=analysis.trim.unique.good.filter.unique.precluster.names)
 
 #generate taxonomy file
-classify.seqs(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, count=analysis.trim.unique.good.filter.unique.precluster.count_table, reference=silva.nr_v128.pcr.align, taxonomy=silva.nr_v128.tax, cutoff=80)
+classify.seqs(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, count=analysis.trim.unique.good.filter.unique.precluster.count_table, reference=silva/silva.nr_v128.pcr.align, taxonomy=silva/silva.nr_v128.tax, cutoff=80)
 
 # rename files (rename command is unreliable)
 system(cp analysis/analysis.trim.unique.good.filter.unique.precluster.fasta analysis/final.fasta)
@@ -101,3 +101,26 @@ make.shared(list=final.an.list, group=final.groups, label=0.03)
 #The final step to getting good OTU data is to normalize the number of sequences in each sample
 #First we need to know how many sequences are in each step
 count.groups()
+
+#sub-sample all the samples to the sample with the fewest sequences(4420)
+#input: final.an.shared file
+#output: final.an.unique.subsample.shared
+sub.sample(shared=final.an.shared, size=4420)
+
+#get the taxonomy information for each of our OTUs
+classify.otu(list=final.an.list, name=final.names, taxonomy=final.taxonomy, label=0.03)
+
+##Phylotype
+#goes through the taxonomy file and bins sequences together that have the same taxonomy
+phylotype(taxonomy=final.taxonomy, name=final.names, label=1)
+
+#make a shared file and standardize the number of sequences in each group
+make.shared(list=final.tx.list, group=final.groups, label=1)
+sub.sample(shared=final.tx.shared, size=4420)
+
+#get the taxonomy of each phylotype
+classify.otu(list=final.tx.list, name=final.names, taxonomy=final.taxonomy, label=1)
+
+##Phylogenetic tree
+#construct a phylip-formatted distance matrix
+dist.seqs(fasta=final.fasta, output=phylip, processors=2)
