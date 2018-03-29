@@ -5,7 +5,7 @@
 
 # rename downloaded database
 #system(cp Silva.seed_128.align SilvaSeed.fasta)
-#or using the updated silva reference files from the MiSeq SOP: silva.nr_v128.align 
+#version 128 silva reference files replacing those from the MiSeq SOP (silva.bacteria.fasta)
 
 # aligns known sequence to complete database
 # move silva.nr_128.align to the silva directory
