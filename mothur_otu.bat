@@ -106,15 +106,35 @@ count.groups()
 
 #sub-sample all the samples to the sample with the fewest sequences(4420)
 #input: final.an.shared file
-#output: final.an.unique.subsample.shared
+#output: final.an.0.03.subsample.shared
 sub.sample(shared=final.an.shared, size=4420)
 
 #Extrac specific ant species to view in venn diagram using phylotype analysis 
-#goes through the taxonomy file and bins sequences together that have the same taxonomy
+#goes through the taxonomy file and bins sequences together that have the same taxonomy, 6 different bins
 #output: final.tx.list, final.tx.rabund, final.tx.sabund
 phylotype(taxonomy=final.taxonomy, name=final.names)
 
-#get the taxonomy of each phylotype
+#get the taxonomy of each phylotype, there are 6 phylotypes
+#output files: 
+#final.tx.1.cons.taxonomy
+#final.tx.1.cons.tax.summary
+#final.tx.2.cons.taxonomy
+#final.tx.2.cons.tax.summary
+#final.tx.3.cons.taxonomy
+#final.tx.3.cons.tax.summary
+#final.tx.4.cons.taxonomy
+#final.tx.4.cons.tax.summary
+#final.tx.5.cons.taxonomy
+#final.tx.5.cons.tax.summary
+#final.tx.6.cons.taxonomy
+#final.tx.6.cons.tax.summary
 classify.otu(list=final.tx.list, name=final.names, taxonomy=final.taxonomy)
 
+#get lineage for the 6 groups
+get.lineage(constaxonomy=final.tx.1.cons.taxonomy,shared=final.an.0.03.subsample.shared,taxon=Edaphobacter)
+get.lineage(constaxonomy=final.tx.2.cons.taxonomy,shared=final.an.0.03.subsample.shared,taxon=Edaphobacter)
+get.lineage(constaxonomy=final.tx.3.cons.taxonomy,shared=final.an.0.03.subsample.shared,taxon=Edaphobacter)
+get.lineage(constaxonomy=final.tx.4.cons.taxonomy,shared=final.an.0.03.subsample.shared,taxon=Edaphobacter)
+get.lineage(constaxonomy=final.tx.5.cons.taxonomy,shared=final.an.0.03.subsample.shared,taxon=Edaphobacter)
+get.lineage(constaxonomy=final.tx.6.cons.taxonomy,shared=final.an.0.03.subsample.shared,taxon=Edaphobacter)
 
