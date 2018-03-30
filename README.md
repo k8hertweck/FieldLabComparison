@@ -21,6 +21,6 @@ Scripts for microbiome analysis of bacterial 16S sequences from ants.
 **Workflow**
 * `dataDownload.sh` download data from NCBI SRA (takes several minutes depending on internet connectivity)
 	* `data/dataCheck.sh` check SRA data against archived sequence files, do not need to run again
-* `mothur_SilvaRef.bat` create custom Silva alignment for reference
+* `mothur_SilvaRef.bat` create custom Silva alignment for reference (takes ~10 minutes)
 * `mothur_prep.sh` split, trim, and aggregate sequence files
 * `mothur_otu.bat` processes combined sequences and outputs OTU table
