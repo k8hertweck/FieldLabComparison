@@ -20,11 +20,11 @@ rm *.tgz
 #setting up data files and directories
 mkdir data/SRP018246 data/SRP018247
 #for Mac
-#cut -f 6 data/SraRunTableSRP018246corrected.txt | tail +2 > data/SRP018246.lst
-#cut -f 6 data/SraRunTableSRP018247.txt | tail +2 > data/SRP018247.lst
+#cut -f 6 data/SraRunTableSRP018246corrected.txt | tail +2 | sort > data/SRP018246.lst
+#cut -f 6 data/SraRunTableSRP018247.txt | tail +2 | sort > data/SRP018247.lst
 #for Ubuntu
-cut -f 6 data/SraRunTableSRP018246corrected.txt | tail --lines=+2 > data/SRP018246.lst
-cut -f 6 data/SraRunTableSRP018247.txt | tail --lines=+2 > data/SRP018247.lst
+cut -f 6 data/SraRunTableSRP018246corrected.txt | tail --lines=+2 | sort > data/SRP018246.lst
+cut -f 6 data/SraRunTableSRP018247.txt | tail --lines=+2 | sort > data/SRP018247.lst
 
 # download  Trachymyrmex/Cyphomyrmex
 cd data/SRP018246
