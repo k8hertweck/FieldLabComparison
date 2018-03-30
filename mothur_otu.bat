@@ -109,20 +109,12 @@ count.groups()
 #output: final.an.unique.subsample.shared
 sub.sample(shared=final.an.shared, size=4420)
 
-#get the taxonomy information for each of our OTUs
-classify.otu(list=final.an.list, name=final.names, taxonomy=final.taxonomy, label=0.03)
-
-##Phylotype
+#Extrac specific ant species to view in venn diagram using phylotype analysis 
 #goes through the taxonomy file and bins sequences together that have the same taxonomy
-phylotype(taxonomy=final.taxonomy, name=final.names, label=1)
-
-#make a shared file and standardize the number of sequences in each group
-make.shared(list=final.tx.list, group=final.groups, label=1)
-sub.sample(shared=final.tx.shared, size=4420)
+#output: final.tx.list, final.tx.rabund, final.tx.sabund
+phylotype(taxonomy=final.taxonomy, name=final.names)
 
 #get the taxonomy of each phylotype
-classify.otu(list=final.tx.list, name=final.names, taxonomy=final.taxonomy, label=1)
+classify.otu(list=final.tx.list, name=final.names, taxonomy=final.taxonomy)
 
-##Phylogenetic tree
-#construct a phylip-formatted distance matrix
-dist.seqs(fasta=final.fasta, output=phylip, processors=2)
+
