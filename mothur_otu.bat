@@ -71,6 +71,7 @@ system(cp analysis/analysis.trim.unique.good.filter.unique.precluster.names anal
 
 system(cp analysis/analysis.trim.unique.good.filter.unique.precluster.nr_v128.wang.taxonomy analysis/final.taxonomy)
 #rename.file(input=analysis.trim.unique.good.filter.unique.precluster.nr_v128.wang.taxonomy, output=final.taxonomy)
+
 system(cp analysis/analysis.good.groups analysis/final.groups)
 #rename.file(input=analysis.good.groups, output=final.groups)
 
