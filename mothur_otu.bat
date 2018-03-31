@@ -125,6 +125,16 @@ phylotype(taxonomy=final.taxonomy, name=final.names)
 #final.tx.6.cons.taxonomy, final.tx.6.cons.tax.summary
 classify.otu(list=final.tx.list, name=final.names, taxonomy=final.taxonomy)
 
+#merge all the taxonomy summary files together in one file called final.cons.tax.summary
+merge.taxsummary(input=final.tx.1.cons.tax.summary-final.tx.2.cons.tax.summary-final.tx.3.cons.tax.summary-final.tx.4.cons.tax.summary-final.tx.5.cons-final.tx.6.cons.tax.summary, output=final.cons.tax.summary)
+
+#In terminal,create final.list.tax.summary file to determine lowest taxonomic rank in merged taxonomy summary file, lowest taxonomic rank is genus
+#selected 3 columns:
+#taxlevels(put in numerical order)
+#taxon name
+#total no. of sequences for specific taxonomic rank
+#cut -f 1,3,5 final.cons.tax.summary|sort -n > final.list.tax.summary
+
 #get lineage for the 6 groups
 get.lineage(constaxonomy=final.tx.1.cons.taxonomy,shared=final.an.0.03.subsample.shared,taxon=Edaphobacter)
 get.lineage(constaxonomy=final.tx.2.cons.taxonomy,shared=final.an.0.03.subsample.shared,taxon=Edaphobacter)
