@@ -135,11 +135,9 @@ merge.taxsummary(input=final.tx.1.cons.tax.summary-final.tx.2.cons.tax.summary-f
 #total no. of sequences for specific taxonomic rank
 #cut -f 1,3,5 final.cons.tax.summary|sort -n > final.list.tax.summary
 
-#get lineage for the 6 groups
-get.lineage(constaxonomy=final.tx.1.cons.taxonomy,shared=final.an.0.03.subsample.shared,taxon=Edaphobacter)
-get.lineage(constaxonomy=final.tx.2.cons.taxonomy,shared=final.an.0.03.subsample.shared,taxon=Edaphobacter)
-get.lineage(constaxonomy=final.tx.3.cons.taxonomy,shared=final.an.0.03.subsample.shared,taxon=Edaphobacter)
-get.lineage(constaxonomy=final.tx.4.cons.taxonomy,shared=final.an.0.03.subsample.shared,taxon=Edaphobacter)
-get.lineage(constaxonomy=final.tx.5.cons.taxonomy,shared=final.an.0.03.subsample.shared,taxon=Edaphobacter)
-get.lineage(constaxonomy=final.tx.6.cons.taxonomy,shared=final.an.0.03.subsample.shared,taxon=Edaphobacter)
+#generates a new shared file containing only sequences from the genus Tectomicrobia
+get.lineage(constaxonomy=final.cons.tax.summary,shared=final.an.0.03.subsample.shared,taxon=Tectomicrobia)
+
+creates a venn diagram for the genus Tectomicrobia
+venn()
 
