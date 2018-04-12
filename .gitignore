@@ -8,7 +8,9 @@ analysis/final.equalized.taxonomy
 analysis/final.tx.1.cons.taxonomy
 analysis/*.groups
 analysis/mergegroups
-analysis/analysis.*
 analysis/*.qual
 analysis/*.sabund
 analysis/*.rabund
+*.logfile
+silva/*.report
+silva/*.summary
