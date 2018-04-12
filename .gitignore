@@ -2,8 +2,6 @@ data/SRP018246
 data/SRP018247
 analysis/
 *.logfile
-silva/silva.*
-silva/*.align
 silva/*.report
 silva/*.summary
 
