@@ -9,12 +9,10 @@ analysis/final.equalized.taxonomy
 analysis/final.tx.1.cons.taxonomy
 analysis/*.sabund
 analysis/*.rabund
-analysis/*.names
 analysis/*.groups
 analysis/mergegroups
 analysis/analysis.*
 analysis/*.qual
-analysis/*.list
 analysis/*.tree.sum
 analysis/final.dist
 analysis/final.an.shared
