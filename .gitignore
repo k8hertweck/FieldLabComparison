@@ -4,4 +4,6 @@ analysis/
 *.logfile
 silva/*.report
 silva/*.summary
-
+silva/silva.*
+silva/README.md
+silva/*.align
