@@ -1,6 +1,16 @@
 data/SRP018246
 data/SRP018247
-analysis/
+data/SraRunTableSRP018246.txt
+analysis/*.fasta
+analysis/*.summary
+analysis/final.equalized.taxonomy
+analysis/final.tx.1.cons.taxonomy
+analysis/*.groups
+analysis/mergegroups
+analysis/analysis.*
+analysis/*.qual
+analysis/*.sabund
+analysis/*.rabund
 *.logfile
 silva/*.report
 silva/*.summary
