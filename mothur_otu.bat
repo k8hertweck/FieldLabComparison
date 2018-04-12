@@ -109,36 +109,5 @@ count.groups()
 #output: final.an.0.03.subsample.shared
 sub.sample(shared=final.an.shared, size=4420)
 
-#Extract specific ant species to view in venn diagram using phylotype analysis 
-#goes through the taxonomy file and bins sequences together that have the same taxonomy, 6 different bins.These bins are known as phylotypes.
-#output: final.tx.list, final.tx.rabund, final.tx.sabund
-phylotype(taxonomy=final.taxonomy, name=final.names)
-
-#get the taxonomy of each phylotype, there are 6 phylotypes
-#produces consensus taxnomy & summary taxonomy files for each phylotype
-#output files: 
-#final.tx.1.cons.taxonomy, final.tx.1.cons.tax.summary,
-#final.tx.2.cons.taxonomy, final.tx.2.cons.tax.summary,
-#final.tx.3.cons.taxonomy, final.tx.3.cons.tax.summary,
-#final.tx.4.cons.taxonomy, final.tx.4.cons.tax.summary,
-#final.tx.5.cons.taxonomy, final.tx.5.cons.tax.summary,
-#final.tx.6.cons.taxonomy, final.tx.6.cons.tax.summary
-classify.otu(list=final.tx.list, name=final.names, taxonomy=final.taxonomy)
-
-#merge all the taxonomy summary files together in one file called final.cons.tax.summary
-merge.taxsummary(input=final.tx.1.cons.tax.summary-final.tx.2.cons.tax.summary-final.tx.3.cons.tax.summary-final.tx.4.cons.tax.summary-final.tx.5.cons.tax.summary-final.tx.6.cons.tax.summary, output=final.cons.tax.summary)
-
-#In terminal,create final.list.tax.summary file to determine lowest taxonomic rank in merged taxonomy summary file, lowest taxonomic rank is genus
-#selected 3 columns:
-#taxlevels(put in numerical order)
-#taxon name
-#total no. of sequences for specific taxonomic rank
-#cut -f 1,3,5 final.cons.tax.summary|sort -n > final.list.tax.summary
-
-#generates a new shared file containing only sequences from the genus Tectomicrobia
-#output: 
-get.lineage(constaxonomy=final.cons.tax.summary,shared=final.an.0.03.subsample.shared,taxon=Tectomicrobia)
-
-creates a venn diagram for the genus Tectomicrobia
-venn(shared=)
-
+creates a venn diagram
+venn(shared=final.an.shared)
