@@ -12,7 +12,10 @@ analysis/*.rabund
 analysis/*.names
 analysis/*.groups
 analysis/mergegroups
-analysis/*.fasta
+analysis/*.unique.fasta
+analysis/*.filter.fasta
+analysis/*.precluster.fasta
+analysis/final.*
 analysis/*.qual
 analysis/*.list
 analysis/*.tree.sum
