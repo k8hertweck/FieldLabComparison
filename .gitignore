@@ -11,3 +11,6 @@ analysis/mergegroups
 analysis/*.qual
 analysis/*.sabund
 analysis/*.rabund
+*.logfile
+silva/*.report
+silva/*.summary
