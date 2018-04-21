@@ -13,10 +13,11 @@ for x in `cat SRP018246.lst`
 	do
 		mothur "#fastq.info(fastq=SRP018246/$x.fastq)"
 done
-#for x in `cat SRP018247.lst`
-#	do
-#		mothur "fastq.info(fastq=SRP018247/$x.fastq)"
-#done
+
+for x in `cat SRP018247.lst`
+	do
+		mothur "fastq.info(fastq=SRP018247/$x.fastq)"
+done
 
 rm *.logfile
 
@@ -36,7 +37,7 @@ done
 
 # create group file
 # output mergegroups
-mothur "#make.group(fasta=SRR655327.trim.fasta-SRR655328.trim.fasta-SRR655329.trim.fasta-SRR655330.trim.fasta-SRR655331.trim.fasta-SRR655332.trim.fasta-SRR655333.trim.fasta-SRR655334.trim.fasta-SRR655335.trim.fasta-SRR655336.trim.fasta-SRR655337.trim.fasta-SRR655338.trim.fasta-SRR655339.trim.fasta-SRR655340.trim.fasta-SRR655341.trim.fasta-SRR655342.trim.fasta-SRR655343.trim.fasta-SRR655344.trim.fasta-SRR655345.trim.fasta-SRR655346.trim.fasta-SRR655347.trim.fasta-SRR655348.trim.fasta-SRR655349.trim.fasta-SRR655350.trim.fasta-SRR655351.trim.fasta-SRR655352.trim.fasta-SRR655353.trim.fasta-SRR655354.trim.fasta-SRR655355.trim.fasta-SRR655356.trim.fasta-SRR655357.trim.fasta-SRR655358.trim.fasta-SRR655359.trim.fasta-SRR655360.trim.fasta-SRR655361.trim.fasta-SRR655362.trim.fasta-SRR655363.trim.fasta-SRR655364.trim.fasta, groups=field-field-field-field-lab-lab-lab-lab-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-lab-lab-lab-lab-field-field-field-field)"
+mothur "#make.group(fasta=SRR655327.trim.fasta-SRR655328.trim.fasta-SRR655329.trim.fasta-SRR655330.trim.fasta-SRR655331.trim.fasta-SRR655332.trim.fasta-SRR655333.trim.fasta-SRR655334.trim.fasta-SRR655335.trim.fasta-SRR655336.trim.fasta-SRR655337.trim.fasta-SRR655338.trim.fasta-SRR655339.trim.fasta-SRR655340.trim.fasta-SRR655341.trim.fasta-SRR655342.trim.fasta-SRR655343.trim.fasta-SRR655344.trim.fasta-SRR655345.trim.fasta-SRR655346.trim.fasta-SRR655347.trim.fasta-SRR655348.trim.fasta-SRR655349.trim.fasta-SRR655350.trim.fasta-SRR655351.trim.fasta-SRR655352.trim.fasta-SRR655353.trim.fasta-SRR655354.trim.fasta-SRR655355.trim.fasta-SRR655356.trim.fasta-SRR655357.trim.fasta-SRR655358.trim.fasta-SRR655359.trim.fasta-SRR655360.trim.fasta-SRR655361.trim.fasta-SRR655362.trim.fasta-SRR655363.trim.fasta-SRR655364.trim.fasta-SRR655990.trim.fasta-SRR655991.trim.fasta-SRR655992.trim.fasta-SRR655993.trim.fasta-SRR655994.trim.fasta-SRR655995.trim.fasta-SRR655996.trim.fasta-SRR655997.trim.fasta-SRR655998.trim.fasta-SRR655999.trim.fasta-SRR656000.trim.fasta-SRR656001.trim.fasta-SRR656002.trim.fasta-SRR656003.trim.fasta-SRR656004.trim.fasta-SRR656005.trim.fasta-SRR656006.trim.fasta-SRR656022.trim.fasta-SRR656023.trim.fasta-SRR656024.trim.fasta-SRR656025.trim.fasta-SRR656026.trim.fasta-SRR656027.trim.fasta-SRR656028.trim.fasta-SRR656029.trim.fasta-SRR656030.trim.fasta-SRR656031.trim.fasta-SRR656032.trim.fasta-SRR656033.trim.fasta, groups=field-field-field-field-lab-lab-lab-lab-field-field-field-field-field-field-lab-lab-lab-lab-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-field-lab-lab-lab-field-field-field-field-field-field-field-field-field-field-field-field-field-field-lab-field-field)"
 
 # rename groups file
 cp mergegroups analysis.groups
