@@ -38,17 +38,3 @@ Scripts for microbiome analysis of bacterial 16S sequences from ants.
 		* `metadata_mapping_file.txt` contains data that assist in combining all fasta files into one fasta file in qiime
 	* `pick_de_novo_otus.py` a series of 7 scripts that outputs OTU table biom file
 		* `qiime_parameters.txt` changes default settings of python script
-		
-*For handling Illumina data*
-* `PairEndSeqPrep.sh` uses 3 scripts to analyze the fastq files and obtain an OTU table biom file	
-	* `join_paired_ends.py` joins paired-end Illumina reads
-	* `extract_barcodes.py` formats fastq sequence and barcode data to be input data for the next script
-		* `mapping_file.txt` contains data that assist in preparing the files as input for the next script
-	* `split_libraries_fastq.py` splits libraries according to barcodes specified in mapping file
-		* `mapping_file.txt` contains barcode data needed to split libraries in qiime
-* `qiime_workflow.sh` uses 3 scripts to take fastq files and obtain an OTU table biom file	
-	* `convert_fastaqual_fastq.py` converts fastq to fasta & qual files in qiime
-	* `add_qiime_labels.py` combines all fasta files into one fasta file in qiime
-		* `metadata_mapping_file.txt` contains data that assist in combining all fasta files into one fasta file in qiime
-	* `pick_de_novo_otus.py` a series of 7 scripts that outputs OTU table biom file
-		* `qiime_parameters.txt` changes default settings of python script
