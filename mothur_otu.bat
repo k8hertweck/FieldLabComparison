@@ -58,9 +58,11 @@ summary.seqs(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, nam
 #chimera.uchime(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, name=analysis.trim.unique.good.filter.unique.precluster.names, group=analysis.good.groups, processors=6)
 
 #generate count table to be used
+#output: analysis.trim.unique.good.filter.unique.precluster.count_table
 count.seqs(name=analysis.trim.unique.good.filter.unique.precluster.names)
 
 #generate taxonomy file
+#output: analysis.trim.unique.good.filter.unique.precluster.taxonomy
 classify.seqs(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, count=analysis.trim.unique.good.filter.unique.precluster.count_table, reference=silva/silva.nr_v128.pcr.align, taxonomy=silva/silva.nr_v128.tax, cutoff=80)
 
 # rename files (rename command is unreliable)
