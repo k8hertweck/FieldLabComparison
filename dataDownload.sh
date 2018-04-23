@@ -34,8 +34,8 @@ for x in `cat ../SRP018246.lst`
 done
 
 # download Mycocepurus
-cd ../SRP018247
-for x in `cat ../SRP018247.lst`
-	do
-		fastq-dump $x
-done
+#cd ../SRP018247
+#for x in `cat ../SRP018247.lst`
+#	do
+#		fastq-dump $x
+#done
