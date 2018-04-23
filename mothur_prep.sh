@@ -13,10 +13,10 @@ for x in `cat SRP018246.lst`
 	do
 		mothur "#fastq.info(fastq=SRP018246/$x.fastq)"
 done
-#for x in `cat SRP018247.lst`
-#	do
-#		mothur "#fastq.info(fastq=SRP018247/$x.fastq)"
-#done
+for x in `cat SRP018247.lst`
+	do
+		mothur "#fastq.info(fastq=SRP018247/$x.fastq)"
+done
 
 rm *.logfile
 
