@@ -21,7 +21,7 @@ summary.seqs(fasta=analysis.trim.unique.fasta, name=analysis.trim.names)
 
 # align our data to silva reference
 # output: analysis.trim.unique.align, analysis.trim.unique.align.report, analysis.trim.unique.flip.accnos 
-align.seqs(fasta=analysis.trim.unique.fasta, reference=silva/silva.bacteria.pcr.fasta, flip=T, processors=6)
+align.seqs(fasta=analysis.trim.unique.fasta, reference=silva/silva.nr_v128.pcr.align, flip=T, processors=6)
 
 # inspect aligned sequences
 # output: analysis.trim.unique.summary
@@ -57,11 +57,23 @@ summary.seqs(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, nam
 # output: analysis.trim.unique.good.filter.unique.precluster.denovo.uchime.chimeras, analysis.trim.unique.good.filter.unique.precluster.denovo.uchime.accnos 
 #chimera.uchime(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, name=analysis.trim.unique.good.filter.unique.precluster.names, group=analysis.good.groups, processors=6)
 
+#generate count table to be used
+#output: analysis.trim.unique.good.filter.unique.precluster.count_table
+count.seqs(name=analysis.trim.unique.good.filter.unique.precluster.names)
+
+#generate taxonomy file
+#output: analysis.trim.unique.good.filter.unique.precluster.taxonomy
+classify.seqs(fasta=analysis/analysis.trim.unique.good.filter.unique.precluster.fasta, count=analysis/analysis.trim.unique.good.filter.unique.precluster.count_table, reference=silva/silva.nr_v128.pcr.align, taxonomy=silva/silva.nr_v128.tax, cutoff=80)
+
 # rename files (rename command is unreliable)
 system(cp analysis/analysis.trim.unique.good.filter.unique.precluster.fasta analysis/final.fasta)
 #rename.file(input=analysis.trim.unique.good.filter.unique.precluster.fasta, output=final.fasta)
 system(cp analysis/analysis.trim.unique.good.filter.unique.precluster.names analysis/final.names)
 #rename.file(input=analysis.trim.unique.good.filter.unique.precluster.names, output=final.names)
+
+system(cp analysis/analysis.trim.unique.good.filter.unique.precluster.nr_v128.wang.taxonomy analysis/final.taxonomy)
+#rename.file(input=analysis.trim.unique.good.filter.unique.precluster.nr_v128.wang.taxonomy, output=final.taxonomy)
+
 system(cp analysis/analysis.good.groups analysis/final.groups)
 #rename.file(input=analysis.good.groups, output=final.groups)
 
@@ -96,26 +108,15 @@ count.groups()
 
 #sub-sample all the samples to the sample with the fewest sequences(4420)
 #input: final.an.shared file
-#output: final.an.unique.subsample.shared
+#output: final.an.0.03.subsample.shared
 sub.sample(shared=final.an.shared, size=4420)
 
 #get the taxonomy information for each of our OTUs
-#DO NOT HAVE A TAXONOMY FILE
-#classify.otu(list=final.an.list, name=final.names, taxonomy=final.taxonomy, label=0.03)
+classify.otu(list=final.an.list, name=final.names, taxonomy=final.taxonomy, label=0.03)
 
 ##Phylotype
 #goes through the taxonomy file and bins sequences together that have the same taxonomy
-#DO NOT HAVE A TAXONOMY FILE
-#phylotype(taxonomy=final.taxonomy, name=final.names, label=1)
-
-#make a shared file and standardize the number of sequences in each group
-make.shared(list=final.tx.list, group=final.groups, label=1)
-#DO NOT HAVE A TAXONOMY FILE
-#sub.sample(shared=final.tx.shared, size=4420)
-
-#get the taxonomy of each phylotype
-#DO NOT HAVE A TAXONOMY FILE
-#classify.otu(list=final.tx.list, name=final.names, taxonomy=final.taxonomy, label=1)
+phylotype(taxonomy=final.taxonomy, name=final.names, label=1)
 
 ##Phylogenetic tree
 #construct a phylip-formatted distance matrix
