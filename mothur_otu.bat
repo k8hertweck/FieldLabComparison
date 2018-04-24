@@ -110,6 +110,3 @@ count.groups()
 #input: final.an.shared file
 #output: final.an.0.03.subsample.shared
 sub.sample(shared=final.an.shared, size=4420)
-
-creates a venn diagram
-venn(shared=final.an.0.03.subsample.shared)
