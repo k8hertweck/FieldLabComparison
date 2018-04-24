@@ -110,3 +110,14 @@ count.groups()
 #input: final.an.shared file
 #output: final.an.0.03.subsample.shared
 sub.sample(shared=final.an.shared, size=4420)
+
+#get the taxonomy information for each of our OTUs
+classify.otu(list=final.an.list, name=final.names, taxonomy=final.taxonomy, label=0.03)
+
+##Phylotype
+#goes through the taxonomy file and bins sequences together that have the same taxonomy
+phylotype(taxonomy=final.taxonomy, name=final.names, label=1)
+
+##Phylogenetic tree
+#construct a phylip-formatted distance matrix
+dist.seqs(fasta=final.fasta, output=phylip, processors=2)
