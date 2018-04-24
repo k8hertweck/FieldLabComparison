@@ -1,7 +1,6 @@
 
 data/SRP018246
 data/SRP018247
-data/SraRunTableSRP018246.txt
 analysis/
 *.logfile
 silva/silva.*
