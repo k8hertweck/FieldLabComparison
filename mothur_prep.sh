@@ -13,10 +13,10 @@ for x in `cat SRP018246.lst`
 	do
 		mothur "#fastq.info(fastq=SRP018246/$x.fastq)"
 done
-#for x in `cat SRP018247.lst`
-#	do
-#		mothur "fastq.info(fastq=SRP018247/$x.fastq)"
-#done
+for x in `cat SRP018247.lst`
+	do
+		mothur "fastq.info(fastq=SRP018247/$x.fastq)"
+done
 
 rm *.logfile
 
@@ -47,4 +47,7 @@ mothur "#merge.files(input=SRR655327.trim.fasta-SRR655328.trim.fasta-SRR655329.t
 # make master qual file
 mothur "#merge.files(input=SRR655327.trim.qual-SRR655328.trim.qual-SRR655329.trim.qual-SRR655330.trim.qual-SRR655331.trim.qual-SRR655332.trim.qual-SRR655333.trim.qual-SRR655334.trim.qual-SRR655335.trim.qual-SRR655336.trim.qual-SRR655337.trim.qual-SRR655338.trim.qual-SRR655339.trim.qual-SRR655340.trim.qual-SRR655341.trim.qual-SRR655342.trim.qual-SRR655343.trim.qual-SRR655344.trim.qual-SRR655345.trim.qual-SRR655346.trim.qual-SRR655347.trim.qual-SRR655348.trim.qual-SRR655349.trim.qual-SRR655350.trim.qual-SRR655351.trim.qual-SRR655352.trim.qual-SRR655353.trim.qual-SRR655354.trim.qual-SRR655355.trim.qual-SRR655356.trim.qual-SRR655357.trim.qual-SRR655358.trim.qual-SRR655359.trim.qual-SRR655360.trim.qual-SRR655361.trim.qual-SRR655362.trim.qual-SRR655363.trim.qual-SRR655364.trim.qual, output=analysis.trim.qual)"
 
-rm *.logfile
+# clean up and reorganize
+rm *.logfile mergegroups
+mkdir sequences
+mv SRR* all.lst sequences/
