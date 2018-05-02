@@ -35,7 +35,7 @@ rmdir seqs.fna
 cd silva
 
 #download qiime-compatible silva 128 release
-wget "https://www.arb-silva.de/download/archive/qiime/Silva_128_release.tgz"
+wget "https://www.arb-silva.de/fileadmin/silva_databases/qiime/Silva_128_release.tgz"
 
 #decompress qiime-compatible silva 128 release
 tar xvzf Silva_128_release.tgz
