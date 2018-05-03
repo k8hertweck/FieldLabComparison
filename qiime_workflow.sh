@@ -42,10 +42,10 @@ tar xvzf Silva_128_release.tgz
 
 cd ..
 #copy qiime-compatible silva 128 release reference file to silva directory
-cp silva/Silva_128_release/rep_set/rep_set_16S_only/97/97_otus_16S.fasta silva/
+cp silva/Silva_128_QIIME_release/rep_set/rep_set_16S_only/97/97_otus_16S.fasta silva/
 
 #copy qiime-compatible silva 128 release taxonomy file to silva directory
-cp silva/Silva_128_release/taxonomy/16S_only/97/consensus_taxonomy_all_levels.txt silva/
+cp silva/Silva_128_QIIME_release/taxonomy/16S_only/97/consensus_taxonomy_all_levels.txt silva/
 
 #run qiime workflow with parameter file
 pick_de_novo_otus.py -i analysis/combined_seqs.fna -p qiime_parameters.txt -o results
