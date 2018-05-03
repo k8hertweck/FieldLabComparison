@@ -17,6 +17,8 @@ rm Silva.nr_v128.gz
 #decompress mothur-compatible silva 128 release
 gunzip silva.nr_v128.align.gz
 
+cd ..
+
 # aligns known sequence to complete database
 # move silva.nr_128.align to the silva directory
 # output: E.coliV1V3.align and E.coliV1V3.align.report
