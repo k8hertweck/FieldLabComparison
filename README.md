@@ -13,14 +13,30 @@ Scripts for microbiome analysis of bacterial 16S sequences from ants.
 * [SRA Toolkit v2.8.1or higher](https://github.com/ncbi/sra-tools) for data download
 * [seq_crumbs](https://bioinf.comav.upv.es/seq_crumbs/) only if using `dataCheck.sh` 
 * [MothuR](https://mothur.org/wiki/Download_mothur) for raw data cleaning and OTU assessment
+* [QIIME 1](http://qiime.org/install/index.html) for raw data cleaning and OTU assessment
 
 **Analysis Design**
 * MothuR analysis based on [454](https://www.mothur.org/wiki/454_SOP) and [MiSeq](https://www.mothur.org/wiki/MiSeq_SOP) tutorials to create OTU table
+* QIIME 1 analysis based on the [454](http://qiime.org/tutorials/tutorial.html) tutorial to create OTU table
 * Visualization and hypothesis testing in R
 
-**Workflow**
-* `dataDownload.sh` download data from NCBI SRA (takes several minutes depending on internet connectivity)
+**Mothur Workflow**
+
+*For handling 454 data*
+* `dataDownload.sh` download data from NCBI SRA (takes several minutes depending on internet connectivity
 	* `data/dataCheck.sh` check SRA data against archived sequence files, do not need to run again
 * `mothur_SilvaRef.bat` create custom Silva alignment for reference (takes ~10 minutes)
 * `mothur_prep.sh` split, trim, and aggregate sequence files (takes several minutes)
 * `mothur_otu.bat` processes combined sequences and outputs OTU table
+
+**QIIME 1 Workflow**
+
+*For handling 454 data*
+* `dataDownload.sh` download data (as fastq files) from NCBI SRA 
+	* `data/dataCheck.sh` check SRA data against archived sequence files, do not need to run again
+* `qiime_workflow.sh` uses 3 scripts to take fastq files and obtain an OTU table biom file	
+	* `convert_fastaqual_fastq.py` converts fastq to fasta & qual files in qiime
+	* `add_qiime_labels.py` combines all fasta files into one fasta file in qiime
+		* `metadata_mapping_file.txt` contains data that assist in combining all fasta files into one fasta file in qiime
+	* `pick_de_novo_otus.py` a series of 7 scripts that outputs OTU table biom file
+		* `qiime_parameters.txt` changes default settings of python script
