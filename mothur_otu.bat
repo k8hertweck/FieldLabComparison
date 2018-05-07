@@ -1,6 +1,6 @@
-## Microbiome Ant Field vs Lab Analysis OTUs using mothur
+## OTU calling for microbiome analysis with mothur
 
-# usage: mothur mothur_otu.bat
+## usage: mothur mothur_otu.bat
 # execute within project directory
 # for explanation of commands: https://www.mothur.org/wiki/Sequence_processing
 
@@ -57,12 +57,12 @@ summary.seqs(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, nam
 # output: analysis.trim.unique.good.filter.unique.precluster.denovo.uchime.chimeras, analysis.trim.unique.good.filter.unique.precluster.denovo.uchime.accnos 
 #chimera.uchime(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, name=analysis.trim.unique.good.filter.unique.precluster.names, group=analysis.good.groups, processors=6)
 
-#generate count table to be used
-#output: analysis.trim.unique.good.filter.unique.precluster.count_table
+# generate count table to be used
+# output: analysis.trim.unique.good.filter.unique.precluster.count_table
 count.seqs(name=analysis.trim.unique.good.filter.unique.precluster.names)
 
-#generate taxonomy file
-#output: analysis.trim.unique.good.filter.unique.precluster.taxonomy
+# generate taxonomy file
+# output: analysis.trim.unique.good.filter.unique.precluster.taxonomy
 classify.seqs(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, count=analysis.trim.unique.good.filter.unique.precluster.count_table, reference=silva/silva.nr_v128.pcr.align, taxonomy=silva/silva.nr_v128.tax, cutoff=80)
 
 # rename files (rename command is unreliable)
@@ -77,47 +77,38 @@ system(cp analysis/analysis.trim.unique.good.filter.unique.precluster.nr_v128.wa
 system(cp analysis/analysis.good.groups analysis/final.groups)
 #rename.file(input=analysis.good.groups, output=final.groups)
 
-# Option 1 or 2 are different methods available to build OTUs
-# Output from Option 2 should be similar to Option 1
-# This workflow uses Option 1.
-
+# build OTUs
+# two methods, option 1 used here
 # Option 1: generate distance matrix
 # cutoff of 0.15 means removing all pairwise distance larger than 0.15
 # If output is >100 GBs of memory, something is wrong
 # output: final.dist
 dist.seqs(fasta=final.fasta, cutoff=0.15, processors=6)
-
 # cluster sequences into OTUs based on distance matrix
 # cutoff is typically 0.03 for further analysis
 # output: final.an.sabund, final.an.rabund, final.an.list 
 cluster(column=final.dist, name=final.names) 
-
-# Option 2: quick and dirty
+# Option 2: quick and dirty alternative (should be about the same as Option 1)
 #cluster.split(fasta=final.fasta, taxonomy=final.taxonomy, name=final.names, taxlevel=3, processors=6)
 
-#The output from Option 2 should be about the same as Option 1. The remainder of this code uses Option 1
-
-#create a table that indicates the number of times an OTU shows up in each sample also known as a shared file
-#input: final.an.list and final.groups file
-#output: final.an.shared file
+# create table indicating number of times an OTU shows up in each sample (shared file)
+# input: final.an.list and final.groups file
+# output: final.an.shared file
 make.shared(list=final.an.list, group=final.groups, label=0.03)
 
-#The final step to getting good OTU data is to normalize the number of sequences in each sample
-#First we need to know how many sequences are in each step
+# normalize by number of sequences
+# count sequences
 count.groups()
-
-#sub-sample all the samples to the sample with the fewest sequences(4420)
-#input: final.an.shared file
-#output: final.an.0.03.subsample.shared
+# sub-sample to fewest sequences (4420)
+# input: final.an.shared file
+# output: final.an.0.03.subsample.shared
 sub.sample(shared=final.an.shared, size=4420)
 
-#get the taxonomy information for each of our OTUs
+# extract taxonomy for each OTU
 classify.otu(list=final.an.list, name=final.names, taxonomy=final.taxonomy, label=0.03)
 
-##Phylotype
-#goes through the taxonomy file and bins sequences together that have the same taxonomy
-phylotype(taxonomy=final.taxonomy, name=final.names, label=1)
-
-##Phylogenetic tree
-#construct a phylip-formatted distance matrix
+# build phylogenetic tree
+# construct distance matrix
 dist.seqs(fasta=final.fasta, output=phylip, processors=2)
+# build tree with clearcut
+clearcut(phylip=final.phylip.dist)
