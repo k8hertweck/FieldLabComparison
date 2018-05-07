@@ -1,4 +1,6 @@
-## Microbiome Ant Field vs Lab Analysis OTUs using mothur
+#!/bin/bash
+
+## Preparing sequence data for mothur analysis
 
 # usage: ./mothur_prep.sh OR bash mothur_prep.sh
 # execute within project directory

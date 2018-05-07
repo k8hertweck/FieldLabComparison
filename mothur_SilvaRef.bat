@@ -1,4 +1,5 @@
-## Create custom Silva alignment for use in Mothur (to replace silva.bacteria.fasta from MiSeq SOP)
+## Create custom Silva alignment for use in Mothur 
+# replaces silva.bacteria.fasta from MiSeq SOP
 
 # usage: mothur mothur_SilvaRef.bat
 # execute within project directory
