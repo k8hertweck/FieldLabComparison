@@ -16,7 +16,6 @@ Scripts for microbiome analysis of bacterial 16S sequences from ants.
 * [QIIME 1](http://qiime.org/install/index.html) for raw data cleaning and OTU assessment
 
 **Setting up data**
-
 * `dataDownload.sh` download data from NCBI SRA and Silva database (takes several minutes depending on internet connectivity)
 	* `data/dataCheck.sh` check SRA data against archived sequence files, do not need to run again
 
@@ -28,7 +27,6 @@ Scripts for microbiome analysis of bacterial 16S sequences from ants.
 * `mothur_otu.bat` processes combined sequences and outputs OTU table
 
 **QIIME 1 Workflow**
-
 * QIIME 1 analysis based on the [454](http://qiime.org/tutorials/tutorial.html) tutorial to create OTU table
 * `qiime_workflow.sh` uses 3 scripts to take fastq files and obtain an OTU table biom file	
 	* `convert_fastaqual_fastq.py` converts fastq to fasta & qual files in qiime
