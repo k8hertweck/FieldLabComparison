@@ -80,27 +80,33 @@ system(cp analysis/analysis.good.groups analysis/final.groups)
 # output: final.dist
 dist.seqs(fasta=final.fasta, cutoff=0.15, processors=6)
 # cluster sequences into OTUs based on distance matrix
-# cutoff is typically 0.03 for further analysis
-# output: final.an.sabund, final.an.rabund, final.an.list 
+# cutoff is 0.03 (default) for further analysis
+# output: final.opti_mcc.list, final.opti_mcc.steps, final.opti_mcc.sabund, final.opti_mcc.rabund, final.opti_mcc.sensspec
 cluster(column=final.dist, name=final.names) 
 # Option 2: quick and dirty alternative (should be about the same as Option 1)
 #cluster.split(fasta=final.fasta, taxonomy=final.taxonomy, name=final.names, taxlevel=3, processors=6)
 
-# create table indicating number of times an OTU shows up in each sample (shared file)
-# input: final.an.list and final.groups file
-# output: final.an.shared file
-make.shared(list=final.an.list, group=final.groups, label=0.03)
-
-# extract taxonomy for each OTU
-classify.otu(list=final.an.list, name=final.names, taxonomy=final.taxonomy, label=0.03)
-
 # normalize by number of sequences
+# create table indicating number of times an OTU shows up in each sample (shared file)
+# output: final.opti_mcc.shared file
+make.shared(list=final.opti_mcc.list, group=final.groups, label=0.03)
 # count sequences
 count.groups()
 # sub-sample to fewest sequences (57316)
-# input: final.an.shared file
 # output: final.an.0.03.subsample.shared
-sub.sample(shared=final.an.shared, size=57316)
+sub.sample(shared=final.opti_mcc.shared, size=57316)
+
+# extract taxonomy for each OTU
+# output: final.opti_mcc.0.03.cons.taxonomy, final.opti_mcc.0.03.cons.tax.summary
+classify.otu(list=final.opti_mcc.list, name=final.names, taxonomy=final.taxonomy, label=0.03)
+
+# make biom files
+# all sequences 
+# output: final.opti_mcc.0.03.biom
+make.biom(shared=final.opti_mcc.shared, constaxonomy=final.opti_mcc.0.03.cons.taxonomy)
+# subsampled sequences
+# output: final.opti_mcc.0.03.subsample.0.03.biom
+make.biom(shared=final.opti_mcc.0.03.subsample.shared, constaxonomy=final.opti_mcc.0.03.cons.taxonomy)
 
 # build phylogenetic tree
 # construct distance matrix
