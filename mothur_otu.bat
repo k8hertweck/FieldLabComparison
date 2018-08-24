@@ -86,15 +86,16 @@ cluster(column=final.dist, name=final.names)
 # Option 2: quick and dirty alternative (should be about the same as Option 1)
 #cluster.split(fasta=final.fasta, taxonomy=final.taxonomy, name=final.names, taxlevel=3, processors=6)
 
-# normalize by number of sequences
 # create table indicating number of times an OTU shows up in each sample (shared file)
 # output: final.opti_mcc.shared file
 make.shared(list=final.opti_mcc.list, group=final.groups, label=0.03)
+
+# normalize by number of sequences
 # count sequences
 count.groups()
-# sub-sample to fewest sequences (57316)
+# sub-sample to fewest sequences
 # output: final.an.0.03.subsample.shared
-sub.sample(shared=final.opti_mcc.shared, size=57316)
+#sub.sample(shared=final.opti_mcc.shared, size=348)
 
 # extract taxonomy for each OTU
 # output: final.opti_mcc.0.03.cons.taxonomy, final.opti_mcc.0.03.cons.tax.summary
@@ -106,10 +107,10 @@ classify.otu(list=final.opti_mcc.list, name=final.names, taxonomy=final.taxonomy
 make.biom(shared=final.opti_mcc.shared, constaxonomy=final.opti_mcc.0.03.cons.taxonomy)
 # subsampled sequences
 # output: final.opti_mcc.0.03.subsample.0.03.biom
-make.biom(shared=final.opti_mcc.0.03.subsample.shared, constaxonomy=final.opti_mcc.0.03.cons.taxonomy)
+#make.biom(shared=final.opti_mcc.0.03.subsample.shared, constaxonomy=final.opti_mcc.0.03.cons.taxonomy)
 
 # build phylogenetic tree
 # construct distance matrix
-dist.seqs(fasta=final.fasta, output=phylip, processors=2)
+#dist.seqs(fasta=final.fasta, output=phylip, processors=2)
 # build tree with clearcut
-clearcut(phylip=final.phylip.dist)
+#clearcut(phylip=final.phylip.dist)
