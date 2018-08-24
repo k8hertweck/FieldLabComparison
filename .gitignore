@@ -8,4 +8,5 @@ silva/*.align
 silva/*.report
 silva/*.summary
 *.out
+.Rproj.user
 
