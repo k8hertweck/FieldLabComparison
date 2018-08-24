@@ -12,7 +12,7 @@ Scripts for microbiome analysis of bacterial 16S sequences from ants.
 **Dependencies:**
 * [SRA Toolkit v2.8.1or higher](https://github.com/ncbi/sra-tools) for data download
 * [seq_crumbs](https://bioinf.comav.upv.es/seq_crumbs/) only if using `dataCheck.sh` 
-* [MothuR](https://mothur.org/wiki/Download_mothur) for raw data cleaning and OTU assessment
+* [MothuR](https://mothur.org/wiki/Download_mothur) for raw data cleaning and OTU assessment; currently set to Mac version, v.1.40.5 (last updated 06/19/18)
 * [QIIME 1](http://qiime.org/install/index.html) for raw data cleaning and OTU assessment
 
 **Setting up data**
