@@ -9,4 +9,4 @@ silva/*.report
 silva/*.summary
 *.out
 .Rproj.user
-
+.Rhistory

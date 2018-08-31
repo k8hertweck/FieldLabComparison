@@ -12,89 +12,115 @@ library(ggplot2)
 
 #### data import ####
 # import biom (otu table and tax table)
-biom <- import_biom("final.opti_mcc.0.03.biom")
-biom
-# the code below corrects this issue with taxonomic ranks
-# view names
-rank_names(biom)
-# correct taxonomy
-colnames(tax_table(biom)) <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus")
-rank_names(biom) 
+otuAll <- import_biom("../analysis/final.opti_mcc.0.03.biom")
+otuAll
+otu <- import_biom("../analysis/final.opti_mcc.0.03.subsample.0.03.biom")
+otu
+# set taxonomic ranks
+rank_names(otu)
+colnames(tax_table(otu)) <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus")
+rank_names(otu)
 # import map (metadata) file
 map <- import_qiime_sample_data("../metadata_mapping_file.txt")
 str(map)
 # import tree file
-rep_tre <- read_tree("tree.nwk")
-rep_tre
+#rep_tre <- read_tree("FILENAME")
+#rep_tre
 # combine otu/tax and map
-comb <- merge_phyloseq(biom, map) #, rep_tre)
+comb <- merge_phyloseq(otu, map) #rep_tre)
 str(comb)
 comb
 
 #### inspect combined otu/taxonomy/map data ####
-## samples
-# show sample names
+
+# samples
 sample_names(comb)
-# count number of samples
 nsamples(comb)
-# show variables (metadata) for samples
-sample_variables(comb)
-## taxa
-# show unique phyla in dataset
-get_taxa_unique(comb, "Phylum")
-# show total counts for each taxon in dataset
-taxa_sums(comb)
-# show only top 10 most frequent taxa
-taxa_sums(comb)[1:10]
-# examine total counts for each sample 
+sample_variables(comb) # field_lab, garden_worker, location, genus, species, colony
 sample_sums(comb)
+# taxa
+get_taxa_unique(comb, "Kingdom")
+get_taxa_unique(comb, "Phylum")
+get_taxa_unique(comb, "Genus")
+taxa_sums(comb)
+taxa_sums(comb)[1:10] # ten most frequent
 
-# rarefy samples to even depth 
-comb.rar <- rarefy_even_depth(comb)
-# this object can be used in place of comb anywhere below
+# extract most frequent taxa
+taxa_names(comb)[1:20]
+topTaxa <- names(sort(taxa_sums(comb), decreasing = TRUE)[1:20])
+topComb <- prune_taxa(topTaxa, comb)
+tax_table(topComb)
 
-#### summary plots and statistical testing
-## richness
-# plot richness calculated across several metrics
-plot_richness(comb)
-# plot richness by body site
-plot_richness(comb, x = "BodySite")
-# plot richness by subject
-plot_richness(comb, x = "Subject")
-# plot richness by reported antibiotic usage
-(p <- plot_richness(comb, x = "ReportedAntibioticUsage"))
-p + geom_boxplot(data = p$data, 
-                 aes(x = ReportedAntibioticUsage), alpha = 0.1)
-# the plot above displays both the boxplots and all data points
+# look for outlier samples
+plot_bar(topComb, fill="Phylum")
 
-## phylogenetic tree
-# extract only data from two families
-comb.sub <- subset_taxa(comb, Family == "Bacteroidaceae" | Family == "[Paraprevotellaceae]")
-# plot tree
-plot_tree(comb.sub, color = "ReportedAntibioticUsage", # color by antibiotic usage
-          shape = "Genus", label.tips = "Species", # specify shape and labels for tips
-          size = "abundance", plot.margin = 0.5, # size points by abundance
-          ladderize = TRUE) # order appearance of tips
+# subset for only higher frequency reads
+combTrim <- prune_samples(sample_sums(comb)>=10, comb)
 
-## abundance bar plots
-# identify 10 most abundant taxa
-top.taxa <- names(sort(taxa_sums(comb), TRUE)[1:10])
-# extract most abundant taxa
-comb.top <- prune_taxa(top.taxa, comb)
-# plot abundance
-plot_bar(comb.top, "BodySite", fill = "ReportedAntibioticUsage", facet_grid = ~Genus)
+#### tree plots and testing ####
 
-## ordination plot
-# NMDS plot
-plot_ordination(comb, ordinate(comb, "MDS"), color = "BodySite") +
-  geom_point(size = 3)
+# plot tree of only top taxa
+#plot_tree(topComb, color = "Sample_Type", label.tips = "Phylum", ladderize = "left", justify = "left" , size = "Abundance")
 
-## network plot
-# calculate distance
-comb.net <- make_network(comb, type = "samples", distance = "bray", max.dist = 0.85)
-# plot network
-plot_network(comb.net, comb, color = "BodySite", shape = "ReportedAntibioticUsage", 
-             line_weight = 0.4, label = NULL)
+#### richness plots and testing ####
+
+# plot richness
+plot_richness(comb, x = "Project", measures = c("Shannon", "Simpson")) +
+  geom_boxplot()
+plot_richness(comb, x = "field_lab", measures = c("Shannon", "Simpson")) +
+  geom_boxplot()
+plot_richness(comb, x = "genus", measures = c("Shannon", "Simpson")) +
+  geom_boxplot()
+plot_richness(comb, x = "species", measures = c("Shannon", "Simpson")) +
+  geom_boxplot()
+plot_richness(comb, x = "location", measures = c("Shannon", "Simpson")) +
+  geom_boxplot()
+plot_richness(comb, x = "garden_worker", measures = c("Shannon", "Simpson")) +
+  geom_boxplot()
+
+# calculate richness
+rich <- estimate_richness(comb) # phyloseq
+# add inverse simpson and order by row name
+rich <- rich[order(row.names(rich)),]
+# order map file by same
+mapOrd <- map[order(map$InputFileName)]
+# bind tables
+richMeta <- cbind(rich, mapOrd)
+# run anova with inverse Simpson
+richInvSimp <- aov(InvSimpson ~ field_lab, richMeta)
+summary(richInvSimp)
+TukeyHSD(richInvSimp, "Sample_Type")
+# run anova on Shannon
+richShann <- aov(Shannon ~ field_lab, richMeta)
+summary(richShann)
+TukeyHSD(richShann)
+
+#### network plots ####
+
+# plot network (older method)
+# mapDist <- make_network(combTrim, type = "samples", distance = "bray", max.dist=0.9, keep.isolates=TRUE)
+# plot_network(mapDist, combTrim, color = "field_lab", shape = "field_lab", point_size = 5, hjust = 2)
+#
+# plot_network(mapDist, combTrim,
+#              color = "field_lab", shape = "field_lab", label=NULL) +
+#   geom_text(aes(label = State), size = 3.5, hjust = -0.5) +
+#   theme(text = element_text(size = 14))
+
+# plot network (newer method)
+#plot_net(combTrim, color="field_lab", point_label = "Locality", maxdist = 0.85)
+
+## ordination plots
+# NMDS
+# combTrim.ord <- ordinate(combTrim, "NMDS", "bray")
+# plot_ordination(combTrim, combTrim.ord, type="samples", color="Sample_Type", shape="Locality") +
+#   geom_polygon(aes(fill=Sample_Type)) +
+#   geom_point(size=5)
+
+# PCoA
+#combTrim.ord2 <- ordinate(combTrim, "PCoA", "bray")
+#plot_ordination(combTrim, combTrim.ord2, type="samples", color="Sample_Type", shape="Locality") +
+#  geom_polygon(aes(fill=Sample_Type)) +
+#  geom_point(size=5)
 
 ## heatmap
-plot_heatmap(comb.top, "NMDS", "bray", "BodySite", "Family")
+#plot_heatmap(comb.top, "NMDS", "bray", "field_lab", "Family")
