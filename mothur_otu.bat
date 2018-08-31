@@ -13,15 +13,15 @@ set.dir(input=analysis)
 summary.seqs(fasta=analysis.trim.fasta)
 
 # simplifying the dataset to only unique sequences
-# output: analysis.trim.names, analysis.trim.unique.fasta 
+# output: analysis.trim.names, analysis.trim.unique.fasta
 unique.seqs(fasta=analysis.trim.fasta)
 
 # inspect unique sequences
-# output: analysis.trim.unique.summary 
+# output: analysis.trim.unique.summary
 summary.seqs(fasta=analysis.trim.unique.fasta, name=analysis.trim.names)
 
 # align our data to silva reference (takes ~10 minutes)
-# output: analysis.trim.unique.align, analysis.trim.unique.align.report, analysis.trim.unique.flip.accnos 
+# output: analysis.trim.unique.align, analysis.trim.unique.align.report, analysis.trim.unique.flip.accnos
 align.seqs(fasta=analysis.trim.unique.fasta, reference=silva/silva.nr_v128.pcr.align, flip=T, processors=6)
 
 # inspect aligned sequences
@@ -32,9 +32,9 @@ summary.seqs(fasta=analysis.trim.unique.align, name=analysis.trim.names)
 # output: analysis.trim.unique.good.align, analysis.trim.unique.bad.accnos, analysis.trim.good.names, analysis.trim.good.groups file
 screen.seqs(fasta=analysis.trim.unique.align, name=analysis.trim.names, group=analysis.groups, optimize=end, criteria=90, processors=6)
 
-# inspect sequences 
-# output: analysis.trim.unique.good.summary 
-summary.seqs(fasta=analysis.trim.unique.good.align, name=analysis.trim.good.names) 
+# inspect sequences
+# output: analysis.trim.unique.good.summary
+summary.seqs(fasta=analysis.trim.unique.good.align, name=analysis.trim.good.names)
 
 # filter alignment to remove columns that don't contain data
 # the parameter trump=. will remove any column that has a "." character, which indicates missing data
@@ -47,15 +47,15 @@ filter.seqs(fasta=analysis.trim.unique.good.align, vertical=T, processors=6)
 unique.seqs(fasta=analysis.trim.unique.good.filter.fasta, name=analysis.trim.good.names)
 
 # pre-cluster within each group (takes hours)
-# output: analysis.trim.unique.good.filter.unique.precluster.fasta, analysis.trim.unique.good.filter.unique.precluster.names, analysis.trim.unique.good.filter.unique.precluster.field.map, analysis.trim.unique.good.filter.unique.precluster.lab.map 
+# output: analysis.trim.unique.good.filter.unique.precluster.fasta, analysis.trim.unique.good.filter.unique.precluster.names, analysis.trim.unique.good.filter.unique.precluster.field.map, analysis.trim.unique.good.filter.unique.precluster.lab.map
 pre.cluster(fasta=analysis.trim.unique.good.filter.unique.fasta, name=analysis.trim.unique.good.filter.names, group=analysis.good.groups, diffs=2, processors=6)
 
 # inspect the preclustered files
-# output: analysis.trim.unique.good.filter.unique.precluster.summary 
+# output: analysis.trim.unique.good.filter.unique.precluster.summary
 summary.seqs(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, name=analysis.trim.unique.good.filter.unique.precluster.names)
 
 # detecting and removing chimeras (unnecessary since completed in SRA data)
-# output: analysis.trim.unique.good.filter.unique.precluster.denovo.uchime.chimeras, analysis.trim.unique.good.filter.unique.precluster.denovo.uchime.accnos 
+# output: analysis.trim.unique.good.filter.unique.precluster.denovo.uchime.chimeras, analysis.trim.unique.good.filter.unique.precluster.denovo.uchime.accnos
 #chimera.uchime(fasta=analysis.trim.unique.good.filter.unique.precluster.fasta, name=analysis.trim.unique.good.filter.unique.precluster.names, group=analysis.good.groups, processors=6)
 
 # generate count table to be used
@@ -82,7 +82,7 @@ dist.seqs(fasta=final.fasta, cutoff=0.15, processors=6)
 # cluster sequences into OTUs based on distance matrix
 # cutoff is 0.03 (default) for further analysis
 # output: final.opti_mcc.list, final.opti_mcc.steps, final.opti_mcc.sabund, final.opti_mcc.rabund, final.opti_mcc.sensspec
-cluster(column=final.dist, name=final.names) 
+cluster(column=final.dist, name=final.names)
 # Option 2: quick and dirty alternative (should be about the same as Option 1)
 #cluster.split(fasta=final.fasta, taxonomy=final.taxonomy, name=final.names, taxlevel=3, processors=6)
 
@@ -92,22 +92,22 @@ make.shared(list=final.opti_mcc.list, group=final.groups, label=0.03)
 
 # normalize by number of sequences
 # count sequences
-count.groups()
+count.groups(shared=final.opti_mcc.shared,)
 # sub-sample to fewest sequences
 # output: final.an.0.03.subsample.shared
-#sub.sample(shared=final.opti_mcc.shared, size=348)
+sub.sample(shared=final.opti_mcc.shared, size=348)
 
 # extract taxonomy for each OTU
 # output: final.opti_mcc.0.03.cons.taxonomy, final.opti_mcc.0.03.cons.tax.summary
 classify.otu(list=final.opti_mcc.list, name=final.names, taxonomy=final.taxonomy, label=0.03)
 
 # make biom files
-# all sequences 
+# all sequences
 # output: final.opti_mcc.0.03.biom
 make.biom(shared=final.opti_mcc.shared, constaxonomy=final.opti_mcc.0.03.cons.taxonomy)
 # subsampled sequences
 # output: final.opti_mcc.0.03.subsample.0.03.biom
-#make.biom(shared=final.opti_mcc.0.03.subsample.shared, constaxonomy=final.opti_mcc.0.03.cons.taxonomy)
+make.biom(shared=final.opti_mcc.0.03.subsample.shared, constaxonomy=final.opti_mcc.0.03.cons.taxonomy)
 
 # build phylogenetic tree
 # construct distance matrix
