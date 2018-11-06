@@ -7,8 +7,12 @@
 library(phyloseq)
 # install ggplot2
 #install.packages("ggplot2")
+#install.packages("VennDiagram")
+#install.packages("gplots")
 # load package
 library(ggplot2)
+library(VennDiagram)
+library(gplots)
 
 #### data import ####
 # import biom (otu table and tax table)
@@ -129,3 +133,11 @@ TukeyHSD(richShann)
 
 ## heatmap
 #plot_heatmap(comb.top, "NMDS", "bray", "field_lab", "Family")
+
+#### Venn diagrams ####
+
+# create a list of OTUs that occur in each sample
+sample1_OTU = colnames(OTU.clean["sample1", apply(OTU.clean["sample1",], MARGIN=2, function(x) any(x >0))])
+sample2_OTU = colnames(OTU.clean["sample2", apply(OTU.clean["sample2",], MARGIN=2, function(x) any(x >0))])
+# plot venn diagram
+venn(list(sample1_OTU, sample2_OTU))
