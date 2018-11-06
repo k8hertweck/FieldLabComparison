@@ -53,6 +53,11 @@ tax_table(topComb)
 
 # look for outlier samples
 plot_bar(topComb, fill="Phylum")
+# sort according to field/lab
+plot_bar(topComb, fill="Phylum", facet_grid = "field_lab")
+# sort according to study
+plot_bar(topComb, fill="Phylum", facet_grid = "Project")
+
 
 # subset for only higher frequency reads
 combTrim <- prune_samples(sample_sums(comb)>=10, comb)
