@@ -136,8 +136,10 @@ TukeyHSD(richShann)
 
 #### Venn diagrams ####
 
+# transpose OTU table
+t_topComb <- t(otu_table(topComb))
 # create a list of OTUs that occur in each sample
-sample1_OTU = colnames(OTU.clean["sample1", apply(OTU.clean["sample1",], MARGIN=2, function(x) any(x >0))])
-sample2_OTU = colnames(OTU.clean["sample2", apply(OTU.clean["sample2",], MARGIN=2, function(x) any(x >0))])
+field_OTU <- colnames(t_topComb[map$field_lab == "field", apply(t_topComb[map$field_lab == "field",], MARGIN=2, function(x) any(x >0))])
+lab_OTU <- colnames(t_topComb[map$field_lab == "lab", apply(t_topComb[map$field_lab == "lab",], MARGIN=2, function(x) any(x >0))])
 # plot venn diagram
-venn(list(sample1_OTU, sample2_OTU))
+venn(list(field_OTU, lab_OTU))
