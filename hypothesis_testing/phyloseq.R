@@ -141,5 +141,15 @@ t_topComb <- t(otu_table(topComb))
 # create a list of OTUs that occur in each sample
 field_OTU <- colnames(t_topComb[map$field_lab == "field", apply(t_topComb[map$field_lab == "field",], MARGIN=2, function(x) any(x >0))])
 lab_OTU <- colnames(t_topComb[map$field_lab == "lab", apply(t_topComb[map$field_lab == "lab",], MARGIN=2, function(x) any(x >0))])
-# plot venn diagram
+# plot venn diagram (simple)
+venn(list(field_OTU, lab_OTU))
+# plot prettier venn diagram
+draw.pairwise.venn(area1 = 9+11, area2 = 0+11, cross.area = 11, category = c("field", "lab"), fill = c("green", "red"))
+
+# transpose OTU table
+t_comb <- t(otu_table(comb))
+# create a list of OTUs that occur in each sample
+field_OTU <- colnames(t_comb[map$field_lab == "field", apply(t_comb[map$field_lab == "field",], MARGIN=2, function(x) any(x >0))])
+lab_OTU <- colnames(t_comb[map$field_lab == "lab", apply(t_comb[map$field_lab == "lab",], MARGIN=2, function(x) any(x >0))])
+# plot venn diagram (simple)
 venn(list(field_OTU, lab_OTU))
